@@ -5,10 +5,20 @@ const dotenv = require("dotenv");
 const bodyparser = require("body-parser");
 const cors = require("cors");
 dotenv.config();
+//Imports
+const ProductRouter = require("./route/product/ProductRouter");
+const { ErrorHandler, NotFound } = require("./middlewares/error/ErrorHandler");
 
+//MiddleWares
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cors());
+
+// routes
+app.use("/api/products", ProductRouter);
+
+app.use(NotFound);
+app.use(ErrorHandler);
 
 app.listen(process.env.PORT, () => {
   mongoose
