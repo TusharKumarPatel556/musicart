@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
-const isUserLoggedIn = (req, res, next) => {
+const IsUserLoggedIn = (req, res, next) => {
   try {
     const token = req.headers.jwttoken;
     const user = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = user;
+    req.body.user = user;
   } catch (err) {
     res.status(500).json({
       message: "Please LogIn First",
@@ -13,4 +13,4 @@ const isUserLoggedIn = (req, res, next) => {
   next();
 };
 
-module.exports = isUserLoggedIn;
+module.exports = IsUserLoggedIn;

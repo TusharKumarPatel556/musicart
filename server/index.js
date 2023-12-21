@@ -7,6 +7,7 @@ const cors = require("cors");
 dotenv.config();
 //Imports
 const ProductRouter = require("./route/product/ProductRouter");
+const UserRouter = require("./route/user/UserRoute");
 const { ErrorHandler, NotFound } = require("./middlewares/error/ErrorHandler");
 
 //MiddleWares
@@ -16,6 +17,7 @@ app.use(cors());
 
 // routes
 app.use("/api/products", ProductRouter);
+app.use("/api/user", UserRouter);
 
 app.use(NotFound);
 app.use(ErrorHandler);
