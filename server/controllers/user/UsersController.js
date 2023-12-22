@@ -1,4 +1,5 @@
 const UserData = require("../../model/user/UserSchema");
+const ProductData = require("../../model/product/ProductSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -77,9 +78,15 @@ const UserLoginController = async (req, res) => {
 };
 
 const UserCartController = async (req, res) => {
-  res.json({
-    message: "working",
-  });
+  try {
+    const CartItem = await ProductData.find({
+      product_name: { $in: ["Sony WH-CH720N"] },
+    });
+    res.json({
+      message: "working",
+      data: CartItem,
+    });
+  } catch (error) {}
 };
 
 module.exports = {
