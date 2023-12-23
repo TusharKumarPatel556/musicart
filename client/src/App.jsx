@@ -1,11 +1,18 @@
-import { useState } from "react";
-
-import "./App.css";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./Pages/LoginPage/LoginPage";
+import Header from "./Components/Header/Header";
 
 function App() {
-  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <Header />
 
-  return <div>hello world</div>;
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
