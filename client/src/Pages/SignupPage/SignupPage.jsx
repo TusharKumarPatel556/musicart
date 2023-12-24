@@ -8,7 +8,6 @@ const SignupPage = () => {
     <div className={styles.loginPage}>
       <LogoContainer />
       <Signup />
-
       <div className={styles.haveanAccount}>
         <h5>
           Already have an account? <u>Sign in</u>

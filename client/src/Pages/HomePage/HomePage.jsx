@@ -5,11 +5,20 @@ import { GoSearch } from "react-icons/go";
 import { FaThList, FaChevronDown } from "react-icons/fa";
 import Filter from "../../Components/Filter/Filter";
 import { useState } from "react";
-import ViewCartBtn from "../../Utils/ViewCartBtn/ViewCartBtn";
+import AboutPage from "../../Utils/AboutPageContainer/AboutPage";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
 const HomePage = () => {
   const [SearchItem, SetSearchItem] = useState("");
+
+  const HandleGridClick = () => {
+    SetView("grid");
+    console.log(View);
+  };
+  const HandleListClick = () => {
+    SetView("list");
+    console.log(View);
+  };
 
   const HandleChange = (e) => {
     SetSearchItem(e.target.value);
@@ -17,13 +26,7 @@ const HomePage = () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.aboutPage}>
-        <div className={styles.pageName}>
-          <img src="/images/logo.png" alt="Logo" /> <h5>Home</h5>
-        </div>
-        <ViewCartBtn />
-      </div>
-
+      <AboutPage />
       <div className={styles.searchArea}>
         <input
           placeholder="Search Product"
@@ -36,8 +39,8 @@ const HomePage = () => {
 
       <div className={styles.productArea}>
         <div className={styles.viewOption}>
-          <IoGridSharp className={styles.viewtype} />
-          <FaThList className={styles.viewtype} />
+          <IoGridSharp onClick={HandleGridClick} className={styles.viewtype} />
+          <FaThList onClick={HandleListClick} className={styles.viewtype} />
         </div>
 
         <div className={styles.filters}>
