@@ -1,0 +1,26 @@
+.dropdownMenu {
+  margin: 0 10px;
+  width: 170px;
+}
+.dropDownbtn {
+  cursor: pointer;
+  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1000px;
+  background-color: #d9d9d9;
+}
+.dropDown {
+  /* margin-left: 5px; */
+  cursor: pointer;
+  border: 2px solid #e1e1e1;
+}
+.hide {
+  display: none;
+}
+.dropdownMenu li {
+  margin: 7px 0px;
+  cursor: pointer;
+  font-size: 15px;
+}
