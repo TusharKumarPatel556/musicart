@@ -13,10 +13,10 @@ const Signup = () => {
   };
 
   const ValidationSchema = Yup.object({
-    name: Yup.string().required("Required"),
-    email: Yup.string().required("Required"),
-    mobile: Yup.string().required("Required"),
-    password: Yup.string().required("Required"),
+    name: Yup.string().required("Name is Required"),
+    email: Yup.string().required("Email is Required"),
+    mobile: Yup.string().required("Mobile Number Required"),
+    password: Yup.string().required("Password is Required"),
   });
 
   const OnSubmit = async (values) => {
@@ -35,7 +35,7 @@ const Signup = () => {
           <Form className={styles.form}>
             <div className={styles.inputContainer}>
               <label className={styles.inputlabel} htmlFor="name">
-                Name
+                Your name
               </label>
               <Field
                 className={styles.inputBox}
@@ -47,21 +47,8 @@ const Signup = () => {
             </div>
 
             <div className={styles.inputContainer}>
-              <label className={styles.inputlabel} htmlFor="email">
-                Email
-              </label>
-              <Field
-                className={styles.inputBox}
-                type="text"
-                name="email"
-                id="email"
-              />
-              <ErrorMessage component={ErrorMsg} name="email" />
-            </div>
-
-            <div className={styles.inputContainer}>
               <label className={styles.inputlabel} htmlFor="mobile">
-                Mobile
+                Mobile number
               </label>
               <Field
                 className={styles.inputBox}
@@ -70,6 +57,19 @@ const Signup = () => {
                 id="mobile"
               />
               <ErrorMessage component={ErrorMsg} name="mobile" />
+            </div>
+
+            <div className={styles.inputContainer}>
+              <label className={styles.inputlabel} htmlFor="email">
+                Email Id
+              </label>
+              <Field
+                className={styles.inputBox}
+                type="text"
+                name="email"
+                id="email"
+              />
+              <ErrorMessage component={ErrorMsg} name="email" />
             </div>
 
             <div className={styles.inputContainer}>
