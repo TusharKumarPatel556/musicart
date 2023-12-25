@@ -1,0 +1,117 @@
+.cartDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+}
+.priceDistribution {
+  display: flex;
+  justify-content: center;
+  padding: 10px 5px;
+}
+.purchaseInfo {
+  display: flex;
+}
+.purchaseInfo div {
+  margin-right: 100px;
+}
+.cartImg {
+  padding: 10px;
+}
+.cartImg img {
+  margin-right: 20px;
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.cartProductname p {
+  color: #a2a2a2;
+}
+
+.priceDetail {
+  width: 200px;
+}
+.priceDetail p {
+  display: flex;
+  justify-content: space-between;
+  line-height: 30px;
+}
+.priceDetail p span:nth-child(2) {
+  width: 50px;
+}
+
+.purchaseInfoMobile,
+.subtotalMobile {
+  display: none;
+}
+
+.subtotal {
+  display: grid;
+  grid-template-columns: 6fr 3fr 3fr 3fr;
+}
+.placeOrder {
+  display: flex;
+  justify-content: end;
+  margin-top: 50px;
+  padding-inline: 260px;
+}
+.placeOrder button {
+  border: none;
+  text-align: center;
+  width: 200px;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #ffd600;
+}
+
+@media only screen and (max-width: 500px) and (min-width: 300px) {
+  .purchaseInfo,
+  .subtotal {
+    display: none;
+  }
+  .priceDistribution {
+    background-color: #dbdbdb;
+  }
+  .purchaseInfoMobile {
+    display: block;
+    line-height: 25px;
+  }
+  .purchaseInfoMobile h3 {
+    font-weight: 1;
+  }
+  .purchaseInfoMobile .price {
+    font-weight: bolder;
+    font-size: 25px;
+  }
+  .subtotalMobile {
+    display: flex;
+    justify-content: end;
+  }
+  .subtotalMobile h4 {
+    width: 200px;
+    display: flex;
+    padding-inline: 30px;
+    font-size: 20px;
+    justify-content: space-between;
+  }
+
+  .placeOrder {
+    display: flex;
+    justify-content: end;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-inline: 0px;
+  }
+  .placeOrder button {
+    border: none;
+    text-align: center;
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: #ffd600;
+  }
+}
