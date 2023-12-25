@@ -33,6 +33,7 @@
   padding-inline: 13px;
   background-color: transparent;
   border: none;
+  border-radius: 0;
 }
 .register button:nth-child(2) {
   border-left: 2px solid var(--white);

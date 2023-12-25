@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./CartDetail.module.css";
+import OrderBtn from "../../Utils/OrderPLaceBtn/OrderBtn";
+import ProductImg from "../../Utils/CartPrdctImg/ProductImg";
 
 const CartDetail = () => {
   return (
     <div>
       <div className={styles.cartDetail}>
         <div className={styles.priceDistribution}>
-          <div className={styles.cartImg}>
-            <img src="" alt="" />
-          </div>
+          <ProductImg />
           <div className={styles.purchaseInfo}>
             <div className={styles.cartProductname}>
               <h3>Sony WH-CH720N</h3>
@@ -72,7 +72,7 @@ const CartDetail = () => {
           </h4>
         </div>
         <div className={styles.placeOrder}>
-          <button type="">PLACE ORDER</button>
+          <OrderBtn name="PLACE ORDER" />
         </div>
       </div>
     </div>

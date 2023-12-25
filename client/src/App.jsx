@@ -10,6 +10,7 @@ import ProductDescription from "./Pages/ProductDescriptionPage/ProductDescriptio
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import UserCart from "./Pages/UserCartPage/UserCart";
+import CheckOut from "./Pages/CheckOutPage/CheckOut";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/usercart" element={<UserCart />} />
+        <Route path="/checkout" element={<CheckOut />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       <Footer />
