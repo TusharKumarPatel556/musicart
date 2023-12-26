@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useContext } from "react";
 import styles from "./Header.module.css";
 import { FiPhoneCall } from "react-icons/fi";
+import { MusicContext } from "../../Context/Context";
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
+  const { LoggedIn, SetLoggedIn, HandleLogin } = useContext(MusicContext);
+
   return (
     <div className={styles.header}>
       <div className={styles.phoneNumber}>
@@ -14,8 +20,20 @@ const Header = () => {
         <p>Shop Now</p>
       </div>
       <div className={styles.register}>
-        <button type="">Login</button>
-        <button type="">Signup</button>
+        {LoggedIn ? (
+          <button type="">Logout</button>
+        ) : (
+          <div>
+            <NavLink className={styles.login} to="/login">
+              <button type="">Login</button>
+            </NavLink>
+            <NavLink className={styles.login} to="/signup">
+              <button className={styles.signup} type="">
+                Signup
+              </button>
+            </NavLink>
+          </div>
+        )}
       </div>
     </div>
   );

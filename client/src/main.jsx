@@ -7,11 +7,14 @@ import "@fontsource/roboto";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/400-italic.css";
 import Footer from "./Components/Footer/Footer.jsx";
+import DataProvider from "./Context/Context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </DataProvider>
   </React.StrictMode>
 );
