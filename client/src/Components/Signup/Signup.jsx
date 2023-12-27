@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./Signup.module.css";
 import ErrorMsg from "../../Utils/ErrorMsg/ErrorMsg";
+import { Register } from "../../Api/UserApi/UserApi";
 
 const Signup = () => {
   const InitialValues = {
@@ -21,6 +22,7 @@ const Signup = () => {
 
   const OnSubmit = async (values) => {
     console.log(values);
+    Register(values);
   };
 
   return (

@@ -1,47 +1,46 @@
 import axios from "axios";
 
-const backendUrl = process.env.REACT_APP_BASE_URL;
-console.log(backendUrl, "hello world");
+const BaseUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
 
-export const register = async (userData) => {
+export const Register = async (userData) => {
   try {
-    console.log(userData);
     const response = await axios({
       method: "post",
-      url: `${backendUrl}/api/users/register`,
+      url: `${BaseUrl}/api/user/register`,
       data: userData,
       headers: {
         "Content-Type": "application/json",
       },
     });
     localStorage.setItem("token", response.data.token);
+
     return response.data.message;
-    console.log(response);
   } catch (err) {
     return err;
   }
 };
 
-export const login = async (userData) => {
-  console.log(userData);
+export const LoginUser = async (userData) => {
   try {
-    console.log(userData);
     const response = await axios({
       method: "get",
-      url: `${backendUrl}/api/users/login`,
-      params: [userData, { item: 1 }],
+      url: `${BaseUrl}/api/user/login`,
+      params: userData,
       headers: {
         "Content-Type": "application/json",
       },
     });
-    localStorage.setItem("token", response.data.token);
-    console.log(response);
-    return response.data.message;
+
+    if (response.status == 200) {
+      localStorage.setItem("token", response.data.token);
+      return response.data.message;
+    }
   } catch (err) {
     return err;
   }
 };
 
-export const logout = () => {
+export const Logout = () => {
+  console.log("logout ");
   localStorage.removeItem("token");
 };

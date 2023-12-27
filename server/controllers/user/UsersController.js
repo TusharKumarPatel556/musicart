@@ -13,7 +13,7 @@ const UserRegisterController = async (req, res) => {
       email: email,
       mobile: mobile,
     });
-    console.log(UserExists);
+
     if (!UserExists) {
       const user = await UserData.create({
         name: name,
@@ -32,7 +32,7 @@ const UserRegisterController = async (req, res) => {
 
         res.status(200).json({
           message: "User created",
-          token: UserExists,
+          token: jwtToken,
         });
       }
     } else {
@@ -50,6 +50,7 @@ const UserRegisterController = async (req, res) => {
 
 //Login Controller
 const UserLoginController = async (req, res) => {
+  console.log("Request for Login");
   try {
     const { email, password } = req.query;
     const user = await UserData.findOne({ email });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./HomePage.module.css";
 import { IoGridSharp } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
@@ -7,9 +7,11 @@ import Filter from "../../Components/Filter/Filter";
 import { useState } from "react";
 import AboutPage from "../../Utils/AboutPageContainer/AboutPage";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import { AllProducts } from "../../Api/ProductApi/ProductApi";
 
 const HomePage = () => {
   const [SearchItem, SetSearchItem] = useState("");
+  const [Products, SetProducts] = useState([]);
 
   const HandleGridClick = () => {
     SetView("grid");
@@ -23,6 +25,16 @@ const HomePage = () => {
   const HandleChange = (e) => {
     SetSearchItem(e.target.value);
   };
+
+  const GetProductsData = async () => {
+    const data = await AllProducts();
+
+    SetProducts(data);
+  };
+
+  useEffect(() => {
+    GetProductsData();
+  }, []);
 
   return (
     <div className={styles.page}>
@@ -56,17 +68,9 @@ const HomePage = () => {
       </div>
 
       <div className={styles.productContainer}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {Products.map((product, index) => (
+          <ProductCard product={product} key={index} />
+        ))}
       </div>
     </div>
   );

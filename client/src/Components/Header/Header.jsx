@@ -4,9 +4,18 @@ import styles from "./Header.module.css";
 import { FiPhoneCall } from "react-icons/fi";
 import { MusicContext } from "../../Context/Context";
 import { NavLink } from "react-router-dom";
+import { Logout } from "../../Api/UserApi/UserApi";
 
 const Header = () => {
-  const { LoggedIn, SetLoggedIn, HandleLogin } = useContext(MusicContext);
+  const { HandleLogin, LoggedIn } = useContext(MusicContext);
+
+  const HandleClick = () => {
+    console.log("Logout clicked");
+    HandleLogin(LoggedIn);
+    Logout();
+  };
+
+  useEffect(() => {}, [LoggedIn]);
 
   return (
     <div className={styles.header}>
@@ -21,7 +30,9 @@ const Header = () => {
       </div>
       <div className={styles.register}>
         {LoggedIn ? (
-          <button type="">Logout</button>
+          <button onClick={HandleClick} type="">
+            Logout
+          </button>
         ) : (
           <div>
             <NavLink className={styles.login} to="/login">

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import styles from "./Login.module.css";
 import ErrorMsg from "../../Utils/ErrorMsg/ErrorMsg";
+import { LoginUser } from "../../Api/UserApi/UserApi";
+import { MusicContext } from "../../Context/Context";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { HandleLogin, LoggedIn } = useContext(MusicContext);
+
   const InitialValues = {
     email: "",
     password: "",
@@ -17,6 +23,12 @@ const Login = () => {
 
   const OnSubmit = async (values) => {
     console.log(values);
+
+    const response = await LoginUser(values);
+    if (response === "user success") {
+      HandleLogin(LoggedIn);
+      navigate("/");
+    }
   };
 
   return (
