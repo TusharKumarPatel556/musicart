@@ -22,8 +22,6 @@ const Login = () => {
   });
 
   const OnSubmit = async (values) => {
-    console.log(values);
-
     const response = await LoginUser(values);
     if (response === "user success") {
       HandleLogin(LoggedIn);

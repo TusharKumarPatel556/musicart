@@ -4,8 +4,7 @@ import styles from "./ProductCard.module.css";
 
 const ProductCard = ({ product }) => {
   const [View, SetView] = useState("grid");
-  console.log("At the product card");
-  console.log(product);
+
   return (
     <div
       id={product._id}

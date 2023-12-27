@@ -4,14 +4,16 @@ import { IoGridSharp } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
 import { FaThList, FaChevronDown } from "react-icons/fa";
 import Filter from "../../Components/Filter/Filter";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AboutPage from "../../Utils/AboutPageContainer/AboutPage";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { AllProducts } from "../../Api/ProductApi/ProductApi";
+import { MusicContext } from "../../Context/Context";
 
 const HomePage = () => {
   const [SearchItem, SetSearchItem] = useState("");
   const [Products, SetProducts] = useState([]);
+  const { InventoryData } = useContext(MusicContext);
 
   const HandleGridClick = () => {
     SetView("grid");
@@ -56,10 +58,10 @@ const HomePage = () => {
         </div>
 
         <div className={styles.filters}>
-          <Filter key="1" name="Headphone Type" />
-          <Filter key="2" name="Company" />
-          <Filter key="3" name="Colour" />
-          <Filter key="4" name="Price" />
+          {InventoryData.map((item, index) => (
+            // console.log(item.list)
+            <Filter key={index} list={item.list} name={item.filter_name} />
+          ))}
         </div>
 
         <div>

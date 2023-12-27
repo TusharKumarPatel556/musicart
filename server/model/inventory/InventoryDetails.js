@@ -2,24 +2,26 @@ const mongoose = require("mongoose");
 
 const InventorySchema = new mongoose.Schema(
   {
+    filter_name: {
+      type: String,
+      required: true,
+    },
     headphone_type: {
       type: [String],
-      required: true,
+      default: undefined,
     },
     company: {
       type: [String],
-      required: true,
+      default: undefined,
     },
     colour: {
       type: [String],
-      required: true,
+      default: undefined,
     },
-    price_range: [
-      {
-        type: [Number],
-        required: true,
-      },
-    ],
+    price_range: {
+      type: [String],
+      default: undefined,
+    },
   },
   { collection: "inventory-data" }
 );
