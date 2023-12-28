@@ -7,6 +7,7 @@ export const MusicContext = createContext();
 const DataProvider = ({ children }) => {
   const [LoggedIn, SetLoggedIn] = useState(false);
   const [InventoryData, SetInventoryData] = useState([]);
+  const [Filters, SetFilters] = useState({});
 
   const HandleLogin = () => {
     SetLoggedIn(!LoggedIn);
@@ -30,6 +31,8 @@ const DataProvider = ({ children }) => {
     SetLoggedIn,
     HandleLogin,
     InventoryData,
+    Filters,
+    SetFilters,
   };
 
   return (

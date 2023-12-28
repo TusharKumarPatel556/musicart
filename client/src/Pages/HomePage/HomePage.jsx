@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import styles from "./HomePage.module.css";
 import { IoGridSharp } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
-import { FaThList, FaChevronDown } from "react-icons/fa";
+import { FaThList } from "react-icons/fa";
 import Filter from "../../Components/Filter/Filter";
 import { useState, useContext } from "react";
 import AboutPage from "../../Utils/AboutPageContainer/AboutPage";
@@ -12,31 +12,38 @@ import { MusicContext } from "../../Context/Context";
 
 const HomePage = () => {
   const [SearchItem, SetSearchItem] = useState("");
+  const { InventoryData, Filters, SetFilters } = useContext(MusicContext);
   const [Products, SetProducts] = useState([]);
-  const { InventoryData } = useContext(MusicContext);
+  const [View, SetView] = useState("grid");
 
   const HandleGridClick = () => {
     SetView("grid");
-    console.log(View);
   };
+
   const HandleListClick = () => {
     SetView("list");
-    console.log(View);
   };
 
   const HandleChange = (e) => {
     SetSearchItem(e.target.value);
+    FilterUpdate();
   };
 
-  const GetProductsData = async () => {
-    const data = await AllProducts();
+  const GetProductsData = async (Filters) => {
+    const data = await AllProducts(Filters);
 
     SetProducts(data);
   };
 
   useEffect(() => {
-    GetProductsData();
-  }, []);
+    GetProductsData(Filters);
+  }, [Filters]);
+
+  useEffect(() => {
+    const FilterUpdate = setTimeout(() => {
+      SetFilters({ ...Filters, product_name: SearchItem });
+    }, 2000);
+  }, [SearchItem]);
 
   return (
     <div className={styles.page}>
@@ -58,21 +65,24 @@ const HomePage = () => {
         </div>
 
         <div className={styles.filters}>
-          {InventoryData.map((item, index) => (
-            // console.log(item.list)
-            <Filter key={index} list={item.list} name={item.filter_name} />
-          ))}
+          {InventoryData
+            ? InventoryData.map((item, index) => (
+                <Filter key={index} list={item.list} name={item.filter_name} />
+              ))
+            : null}
         </div>
 
         <div>
-          <Filter key="5" name="Sort by : Featured" />
+          <Filter />
         </div>
       </div>
 
       <div className={styles.productContainer}>
-        {Products.map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))}
+        {Products
+          ? Products.map((product, index) => (
+              <ProductCard View={View} product={product} key={index} />
+            ))
+          : null}
       </div>
     </div>
   );

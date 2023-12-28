@@ -1,11 +1,14 @@
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
+import { useState, useEffect, useContext } from "react";
+import { MusicContext } from "../../Context/Context";
 import styles from "./Filter.module.css";
-import { useState, useEffect } from "react";
+import { AllProducts } from "../../Api/ProductApi/ProductApi";
 
 const Filter = (props) => {
   const [Display, SetDisplay] = useState(false);
   const [list, setlist] = useState([]);
+  const { Filters, SetFilters } = useContext(MusicContext);
 
   useEffect(() => {
     setlist(props.list);
@@ -14,9 +17,11 @@ const Filter = (props) => {
   const HandleDisplay = () => {
     SetDisplay(!Display);
   };
-  function handleClick(e) {
-    console.log(e.target.name);
-  }
+  const HandleClick = (e) => {
+    const Value = e.target.getAttribute("value");
+    const Name = e.target.getAttribute("name");
+    SetFilters({ ...Filters, [Name]: Value });
+  };
   return (
     <div className={styles.dropdownMenu}>
       <div onClick={HandleDisplay} className={styles.dropDownbtn}>
@@ -25,35 +30,59 @@ const Filter = (props) => {
       </div>
       <div className={Display ? styles.dropdown : styles.hide}>
         {props.name ? (
-          <ul>
-            <li name="sort">Featured</li>
-            <li
-              onClick={(event) => handleClick(event)}
-              name="sort"
-              value="price,-1"
-            >
-              Price:Lowest
-            </li>
-            <li name="sort" value="price,1">
-              Price:Highest
-            </li>
-            <li name="sort" value="name,1">
-              Name:(A-Z)
-            </li>
-            <li name="sort" value="name,-1">
-              Name:(Z-A)
-            </li>
-          </ul>
-        ) : (
-          <>
+          <div>
             {list
               ? list.map((item, index) => (
-                  <li name={props.name.split(" ")[0]} key={index}>
+                  <li
+                    onClick={(event) => HandleClick(event)}
+                    name={props.name.split(" ")[0]}
+                    key={index}
+                    value={item}
+                  >
                     {item}
                   </li>
                 ))
               : "null"}
-          </>
+          </div>
+        ) : (
+          <ul>
+            <li
+              id="fet"
+              onClick={(event) => HandleClick(event)}
+              value=""
+              name="Sort"
+            >
+              Featured
+            </li>
+            <li
+              name="Sort"
+              onClick={(event) => HandleClick(event)}
+              value="price,-1"
+            >
+              Price:Lowest
+            </li>
+            <li
+              name="Sort"
+              onClick={(event) => HandleClick(event)}
+              value="price,1"
+            >
+              Price:Highest
+            </li>
+            <li
+              onClick={(event) => HandleClick(event)}
+              name="Sort"
+              value="name,1"
+            >
+              Name:(A-Z)
+            </li>
+            <li
+              onClick={(event) => HandleClick(event)}
+              name="Sort"
+              value="name,-1"
+            >
+              Name:(Z-A)
+            </li>
+          </ul>
         )}
       </div>
     </div>

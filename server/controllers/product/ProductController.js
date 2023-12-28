@@ -28,41 +28,59 @@ const AllProductsController = async (req, res) => {
 };
 
 const FilterProductController = async (req, res) => {
+  console.log(req.query);
   try {
     const {
-      type = null,
-      company = null,
-      color = null,
-      price_min = 0,
-      price_max = 1000000000000,
-      sorting_criteria = null,
+      Headphone = null,
+      Company = null,
+      Colour = null,
+      Price = "0-1000000000000",
+      Sort = null,
+      product_name = null,
     } = req.query;
+
+    // const {
+    //   type = null,
+    //   company = null,
+    //   color = null,
+    //   price_min = 0,
+    //   price_max = 1000000000000,
+    //   sorting_criteria = null,
+    // } = req.query;
 
     const sort_type = {};
     const filter = {};
-    if (type) filter.type = type;
-    if (color) filter.color = color;
-    if (company) filter.brand = company;
-    if (price_min)
+
+    if (product_name)
+      filter.product_name = { $regex: new RegExp(product_name, "i") };
+
+    if (Headphone && Headphone != "Featured") {
+      filter.type = Headphone.split(" ")[0];
+    }
+
+    if (Colour && Colour != "Featured") filter.color = Colour;
+    if (Company && Company != "Featured") filter.brand = Company;
+    if (Price && Price != "Featured") {
+      const [price_min, price_max] = Price.split("-");
       filter.$and = [
         { price: { $lt: price_max } },
         { price: { $gt: price_min } },
       ];
-
-    if (sorting_criteria) {
-      const [sortby, order] = sorting_criteria.split(",");
+    }
+    if (Sort && Sort != "Featured") {
+      const [sortby, order] = Sort.split(",");
       if (sortby == "name") sort_type.product_name = Number(order);
       if (sortby == "price") sort_type.price = Number(order);
     }
+    console.log(filter);
     const SomeDatacount = await ProductData.find(filter)
       .sort(sort_type)
       .countDocuments();
-    const SomeData = await ProductData.find(filter).sort(sort_type);
+    const products = await ProductData.find(filter).sort(sort_type);
 
     res.json({
       count: SomeDatacount,
-      data: SomeData,
-      message: { type, company, color, price_min, price_max },
+      products: products,
     });
   } catch (error) {
     res.status(500).json({

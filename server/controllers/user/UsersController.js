@@ -50,13 +50,12 @@ const UserRegisterController = async (req, res) => {
 
 //Login Controller
 const UserLoginController = async (req, res) => {
-  console.log("Request for Login");
   try {
     const { email, password } = req.query;
     const user = await UserData.findOne({ email });
-    console.log(user);
+
     const passwordMatched = await bcrypt.compare(password, user.password);
-    console.log(passwordMatched);
+
     if (!passwordMatched) {
       res.status(500).json({
         message: "user failed",

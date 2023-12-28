@@ -2,12 +2,18 @@ import axios from "axios";
 
 const BaseUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
 
-export const AllProducts = async () => {
+export const AllProducts = async (Filters) => {
   try {
+    console.log("Filter Data", Filters);
     const response = await axios({
       method: "get",
-      url: `${BaseUrl}/api/products/all-products`,
+      url: `${BaseUrl}/api/products/some-products`,
+      params: Filters,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+
     return response.data.products;
   } catch (error) {
     return error.message;

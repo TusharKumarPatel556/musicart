@@ -1,12 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProductCard.module.css";
 
-const ProductCard = ({ product }) => {
-  const [View, SetView] = useState("grid");
+const ProductCard = ({ product, View }) => {
+  const Navigate = useNavigate();
+
+  const ShowDetailInfo = (e) => {
+    Navigate(`/productdetails/${product._id}`);
+  };
 
   return (
     <div
+      onClick={(event) => ShowDetailInfo(event)}
       id={product._id}
       className={View === "grid" ? styles.gridCard : styles.listCard}
     >
