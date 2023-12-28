@@ -14,9 +14,11 @@ const InventoryDetails = async (req, res) => {
   }
 };
 
-const AllProductsController = async (req, res) => {
+const ProductDetailController = async (req, res) => {
+  console.log(req.params.id);
+
   try {
-    const products = await ProductData.find();
+    const products = await ProductData.find({ _id: req.params.id });
     res.status(200).json({
       products: products,
     });
@@ -28,7 +30,6 @@ const AllProductsController = async (req, res) => {
 };
 
 const FilterProductController = async (req, res) => {
-  console.log(req.query);
   try {
     const {
       Headphone = null,
@@ -72,7 +73,7 @@ const FilterProductController = async (req, res) => {
       if (sortby == "name") sort_type.product_name = Number(order);
       if (sortby == "price") sort_type.price = Number(order);
     }
-    console.log(filter);
+
     const SomeDatacount = await ProductData.find(filter)
       .sort(sort_type)
       .countDocuments();
@@ -90,7 +91,7 @@ const FilterProductController = async (req, res) => {
 };
 
 module.exports = {
-  AllProductsController,
+  ProductDetailController,
   FilterProductController,
   InventoryDetails,
 };

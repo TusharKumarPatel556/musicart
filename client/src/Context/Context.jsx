@@ -8,6 +8,7 @@ const DataProvider = ({ children }) => {
   const [LoggedIn, SetLoggedIn] = useState(false);
   const [InventoryData, SetInventoryData] = useState([]);
   const [Filters, SetFilters] = useState({});
+  const [UserCart, SetUserCart] = useState({});
 
   const HandleLogin = () => {
     SetLoggedIn(!LoggedIn);
@@ -33,6 +34,8 @@ const DataProvider = ({ children }) => {
     InventoryData,
     Filters,
     SetFilters,
+    UserCart,
+    SetUserCart,
   };
 
   return (

@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  AllProductsController,
+  ProductDetailController,
   FilterProductController,
   InventoryDetails,
 } = require("../../controllers/product/ProductController");
@@ -8,7 +8,7 @@ const {
 const ProductRouter = express.Router();
 
 ProductRouter.get("/inventory-detail", InventoryDetails);
-ProductRouter.get("/all-products", AllProductsController);
+ProductRouter.get("/product-detail/:id", ProductDetailController);
 ProductRouter.get("/some-products", FilterProductController);
 
 module.exports = ProductRouter;

@@ -44,3 +44,20 @@ export const Logout = () => {
   console.log("logout ");
   localStorage.removeItem("token");
 };
+
+export const AddItem = async (CartItems) => {
+  try {
+    const response = await axios({
+      method: "put",
+      url: `${BaseUrl}/api/user/user-cart`,
+      data: CartItems,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data.message;
+  } catch (err) {
+    return err;
+  }
+};

@@ -5,21 +5,20 @@ import styles from "./ProductCard.module.css";
 
 const ProductCard = ({ product, View }) => {
   const Navigate = useNavigate();
-
   const ShowDetailInfo = (e) => {
     Navigate(`/productdetails/${product._id}`);
   };
 
   return (
     <div
-      onClick={(event) => ShowDetailInfo(event)}
+      onClick={ShowDetailInfo}
       id={product._id}
       className={View === "grid" ? styles.gridCard : styles.listCard}
     >
       <div
         className={View === "grid" ? styles.gridCardImg : styles.listCardImg}
       >
-        <img src={product.img_url} alt="Product Description" />
+        <img src={product.img_url[0]} alt="Product Description" />
       </div>
       <div
         className={
