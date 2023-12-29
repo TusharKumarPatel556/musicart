@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./CartDetail.module.css";
 import OrderBtn from "../../Utils/OrderPLaceBtn/OrderBtn";
 import ProductImg from "../../Utils/CartPrdctImg/ProductImg";
@@ -31,7 +32,7 @@ const CartDetail = () => {
 
   useEffect(() => {
     CartData(CartItems);
-  }, [UserCart]);
+  }, []);
 
   return (
     <div>
@@ -116,9 +117,11 @@ const CartDetail = () => {
                   </div>
                 </>
               ))}
-              <div className={styles.placeOrder}>
-                <OrderBtn name="PLACE ORDER" />
-              </div>
+              <NavLink to="/checkout">
+                <div className={styles.placeOrder}>
+                  <OrderBtn name="PLACE ORDER" />
+                </div>
+              </NavLink>
             </div>
           </div>
         </>

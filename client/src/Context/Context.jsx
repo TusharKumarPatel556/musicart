@@ -12,22 +12,14 @@ const DataProvider = ({ children }) => {
   const [UserCart, SetUserCart] = useState({});
   const [CartItems, SetCartItems] = useState([]);
 
-  const HandleLogin = () => {
-    SetLoggedIn(!LoggedIn);
+  const HandleLogin = (parameter) => {
+    SetLoggedIn(parameter);
   };
 
   const GetInventory = async () => {
     const response = await InventoryInfo();
     SetInventoryData(response);
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      SetLoggedIn(true);
-    }
-    GetInventory();
-  }, [LoggedIn]);
 
   useEffect(() => {
     SetCartItem(UserCart);

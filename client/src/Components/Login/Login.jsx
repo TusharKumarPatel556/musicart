@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -17,6 +17,12 @@ const Login = () => {
     password: "",
   };
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      HandleLogin(true);
+    }
+  }, []);
+
   const ValidationSchema = Yup.object({
     email: Yup.string().required("Email Id or Phone Number is Required"),
     password: Yup.string().required("Password is Required"),
@@ -29,7 +35,7 @@ const Login = () => {
       SetUserCart({ ...response.data.cart[0], ...UserCart });
       console.log("User loggedin", response.data.cart);
       console.log("User loggedin", UserCart);
-      // navigate("/");
+      navigate("/");
     }
   };
 

@@ -40,11 +40,6 @@ export const LoginUser = async (userData) => {
   }
 };
 
-export const Logout = () => {
-  console.log("logout ");
-  localStorage.removeItem("token");
-};
-
 export const SetCartItem = async (CartItems) => {
   try {
     const response = await axios({
@@ -77,4 +72,8 @@ export const GetCartItem = async (CartItems) => {
   } catch (err) {
     return err;
   }
+};
+export const Logout = () => {
+  console.log("logout ");
+  localStorage.removeItem("token");
 };

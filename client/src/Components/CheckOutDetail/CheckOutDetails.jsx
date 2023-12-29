@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./CheckOutDetails.module.css";
 import OrderBtn from "../../Utils/OrderPLaceBtn/OrderBtn";
 import ProductImg from "../../Utils/CartPrdctImg/ProductImg";
+import { MusicContext } from "../../Context/Context";
 
 const CheckOutDetails = () => {
+  const { UserCart, SetUserCart, CartItems, SetCartItems } =
+    useContext(MusicContext);
+  const [Total, SetTotal] = useState(0);
+  let price = 0;
+
+  useEffect(() => {
+    CartItems.map((item, index) => {
+      price = item.price * item.quantity + price;
+      SetTotal(price);
+    });
+  });
+
+  console.log("These are the cart items", Total);
+
   return (
     <div className={styles.checkOutdetail}>
       <div className={styles.checkoutRows}>
@@ -26,10 +41,14 @@ const CheckOutDetails = () => {
         <div className={styles.paymentMethod}>Pay on delivery ( Cash/Card)</div>
         <div className={styles.orderSummery}>
           <h3>Order Summery</h3>
-          <h4>
-            <span>Items:</span>
-            <span>&#8377;3500.00</span>
-          </h4>
+
+          {CartItems.map((item, index) => (
+            <h4>
+              <span>{item.product_name}:</span>
+              <span>&#8377;{item.price}</span>
+            </h4>
+          ))}
+
           <h4>
             <span>Delivery:</span>
             <span>&#8377;45.00</span>
@@ -39,16 +58,20 @@ const CheckOutDetails = () => {
       <div className={styles.checkoutRows}>
         <div>3. Review items and delivery</div>
         <div>
-          <ProductImg />
-          <div className={styles.delivery}>
-            <h3>Sony WH-CH720N</h3>
-            <p>Color-Black</p>
-            <p>In Stock</p>
-            <h4>Estimated delivery:Monday-FREE Standard Delivery</h4>
-          </div>
+          {CartItems.map((item, index) => (
+            <>
+              <ProductImg img={item.img_url[0]} />
+              <div className={styles.delivery}>
+                <h3>{item.product_name}</h3>
+                <p>Color-{item.color}</p>
+                <p>{item.availability}</p>
+                <h4>Estimated delivery:Monday-FREE Standard Delivery</h4>
+              </div>
+            </>
+          ))}
         </div>
         <div className={styles.orderTotal}>
-          <span>Order Total:</span> <span>&#8377;3545</span>
+          <span>Order Total:</span> <span>&#8377;{Total}</span>
         </div>
       </div>
 
@@ -57,7 +80,7 @@ const CheckOutDetails = () => {
           <OrderBtn name="Place your order" />
         </div>
         <div>
-          <h4 className={styles.orderTotal}>Order Total : ₹3545.00</h4>
+          <h4 className={styles.orderTotal}>Order Total : ₹{Total}</h4>
           <p>
             By placing your order, you agree to Musicart privacy notice and
             conditions of use

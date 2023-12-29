@@ -5,17 +5,24 @@ import { FiPhoneCall } from "react-icons/fi";
 import { MusicContext } from "../../Context/Context";
 import { NavLink } from "react-router-dom";
 import { Logout } from "../../Api/UserApi/UserApi";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { HandleLogin, LoggedIn } = useContext(MusicContext);
+  const { HandleLogin, LoggedIn, SetLoggedIn } = useContext(MusicContext);
+  const Navigate = useNavigate();
 
   const HandleClick = () => {
-    console.log("Logout clicked");
-    HandleLogin(LoggedIn);
-    Logout();
+    localStorage.removeItem("token");
+    HandleLogin(false);
   };
-
-  useEffect(() => {}, [LoggedIn]);
+  if (localStorage.getItem("token")) {
+    HandleLogin(true);
+  }
+  useEffect(() => {
+    if (LoggedIn == false) {
+      Navigate("/");
+    }
+  }, [LoggedIn]);
 
   return (
     <div className={styles.header}>
