@@ -1,6 +1,7 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
 import { InventoryInfo } from "../Api/ProductApi/ProductApi";
+import { SetCartItem } from "../Api/UserApi/UserApi";
 
 export const MusicContext = createContext();
 
@@ -9,6 +10,7 @@ const DataProvider = ({ children }) => {
   const [InventoryData, SetInventoryData] = useState([]);
   const [Filters, SetFilters] = useState({});
   const [UserCart, SetUserCart] = useState({});
+  const [CartItems, SetCartItems] = useState([]);
 
   const HandleLogin = () => {
     SetLoggedIn(!LoggedIn);
@@ -27,6 +29,10 @@ const DataProvider = ({ children }) => {
     GetInventory();
   }, [LoggedIn]);
 
+  useEffect(() => {
+    SetCartItem(UserCart);
+  }, [UserCart]);
+
   const InitialState = {
     LoggedIn,
     SetLoggedIn,
@@ -36,6 +42,8 @@ const DataProvider = ({ children }) => {
     SetFilters,
     UserCart,
     SetUserCart,
+    CartItems,
+    SetCartItems,
   };
 
   return (

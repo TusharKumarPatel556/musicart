@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./ProductImg.module.css";
 
-const ProductImg = () => {
+const ProductImg = ({ img }) => {
   return (
     <div className={styles.cartImg}>
-      <img src="" alt="" />
+      <img src={img} alt="" />
     </div>
   );
 };

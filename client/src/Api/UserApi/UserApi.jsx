@@ -33,7 +33,7 @@ export const LoginUser = async (userData) => {
 
     if (response.status == 200) {
       localStorage.setItem("token", response.data.token);
-      return response.data.message;
+      return response;
     }
   } catch (err) {
     return err;
@@ -45,18 +45,35 @@ export const Logout = () => {
   localStorage.removeItem("token");
 };
 
-export const AddItem = async (CartItems) => {
+export const SetCartItem = async (CartItems) => {
   try {
     const response = await axios({
       method: "put",
-      url: `${BaseUrl}/api/user/user-cart`,
-      data: CartItems,
+      url: `${BaseUrl}/api/user/set-user-cart`,
+      params: CartItems,
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
+      },
+    });
+  } catch (err) {
+    return err;
+  }
+};
+
+export const GetCartItem = async (CartItems) => {
+  try {
+    const response = await axios({
+      method: "get",
+      url: `${BaseUrl}/api/user/get-user-cart`,
+      params: CartItems,
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
       },
     });
 
-    return response.data.message;
+    return response.data.CartItem;
   } catch (err) {
     return err;
   }

@@ -20,7 +20,7 @@ const UserRegisterController = async (req, res) => {
         email: email,
         mobile: mobile,
         password: encryptedPassword,
-        cart: [{ item: 1 }, { item2: 23 }],
+        cart: [],
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -63,11 +63,13 @@ const UserLoginController = async (req, res) => {
       });
     } else {
       const jwtToken = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
-        expiresIn: 7200,
+        expiresIn: 48000,
       });
+
       res.status(200).json({
         message: `user success`,
         token: jwtToken,
+        cart: user.cart,
       });
     }
   } catch (err) {
@@ -77,11 +79,52 @@ const UserLoginController = async (req, res) => {
   }
 };
 
-const UserCartController = async (req, res) => {
+const GetCartController = async (req, res) => {
+  console.log("get item", req.query);
   try {
-    const CartItem = await ProductData.find({
-      product_name: { $in: ["Sony WH-CH720N"] },
+    const ItemList = Object.keys(req.query);
+    const Quantities = Object.values(req.query);
+
+    console.log("get item", ItemList);
+    console.log("get item", Quantities);
+    const CartProducts = await ProductData.find({
+      _id: { $in: ItemList },
     });
+
+    CartProducts.forEach((item, index, array) => {
+      array[index] = { ...item.toJSON(), ...{ quantity: Quantities[index] } };
+    });
+
+    res.json({
+      message: "working",
+      CartItem: CartProducts,
+    });
+  } catch (error) {
+    res.json({
+      error: error.message,
+    });
+  }
+};
+
+const SetCartController = async (req, res) => {
+  try {
+    // console.log("cart add request");
+    const usercart = req.query;
+    const { _id, name, email, mobile, password, cart } = req.body.user;
+    const user = await UserData.find({ email: email });
+    // console.log("old cart items", cart, "new cart item", usercart);
+    // { ...cart[0], ...usercart }
+    if (user) {
+      const result = await UserData.updateOne(
+        { _id: _id },
+        {
+          $set: {
+            cart: { ...cart[0], ...usercart },
+            updatedAt: new Date(),
+          },
+        }
+      );
+    }
     res.json({
       message: "working",
       data: CartItem,
@@ -92,5 +135,6 @@ const UserCartController = async (req, res) => {
 module.exports = {
   UserRegisterController,
   UserLoginController,
-  UserCartController,
+  GetCartController,
+  SetCartController,
 };

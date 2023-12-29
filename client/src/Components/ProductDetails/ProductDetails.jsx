@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import styles from "./ProductDetails.module.css";
 import { FaStar } from "react-icons/fa6";
 import Carousel from "../Carousel/Carousel";
@@ -14,7 +14,6 @@ const ProductDetails = () => {
   const Navigate = useNavigate();
   const { UserCart, SetUserCart } = useContext(MusicContext);
 
-  console.log("User Cart", UserCart);
   const GetDetails = async (ProductId) => {
     const response = await ProductInfo(ProductId);
 
@@ -22,12 +21,11 @@ const ProductDetails = () => {
   };
 
   const AddtoCart = async () => {
-    const name = Product.product_name.split(" ").join("");
     let quantity = 1;
-    if (UserCart[name]) {
-      quantity = UserCart[name][1] + 1;
+    if (UserCart[ProductId]) {
+      quantity = UserCart[ProductId] + 1;
     }
-    SetUserCart({ ...UserCart, [name]: [Product.product_name, quantity] });
+    SetUserCart({ ...UserCart, [ProductId]: quantity });
   };
 
   useEffect(() => {
@@ -125,8 +123,9 @@ const ProductDetails = () => {
             ) : (
               <button type="">Login / Signup</button>
             )}
-
-            <button type="">Buy Now</button>
+            <NavLink to="/usercart">
+              <button type="">Buy Now</button>
+            </NavLink>
           </div>
         </div>
       </div>

@@ -9,7 +9,8 @@ import { MusicContext } from "../../Context/Context";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { HandleLogin, LoggedIn } = useContext(MusicContext);
+  const { HandleLogin, LoggedIn, UserCart, SetUserCart } =
+    useContext(MusicContext);
 
   const InitialValues = {
     email: "",
@@ -23,9 +24,12 @@ const Login = () => {
 
   const OnSubmit = async (values) => {
     const response = await LoginUser(values);
-    if (response === "user success") {
+    if (response.data.message === "user success") {
       HandleLogin(LoggedIn);
-      navigate("/");
+      SetUserCart({ ...response.data.cart[0], ...UserCart });
+      console.log("User loggedin", response.data.cart);
+      console.log("User loggedin", UserCart);
+      // navigate("/");
     }
   };
 
