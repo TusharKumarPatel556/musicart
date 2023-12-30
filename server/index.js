@@ -8,7 +8,7 @@ dotenv.config();
 //Imports
 const ProductRouter = require("./route/product/ProductRouter");
 const UserRouter = require("./route/user/UserRoute");
-const { ErrorHandler, NotFound } = require("./middlewares/error/ErrorHandler");
+// const { ErrorHandler, NotFound } = require("./middlewares/error/ErrorHandler");
 
 //MiddleWares
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -25,10 +25,14 @@ app.use(cors(CorsRules));
 app.use("/api/products", ProductRouter);
 app.use("/api/user", UserRouter);
 
-app.use(NotFound);
-app.use(ErrorHandler);
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
 
-app.listen(process.env.PORT, () => {
+// app.use(NotFound);
+// app.use(ErrorHandler);
+
+app.listen(process.env.PORT || 3000, () => {
   mongoose
     .connect(process.env.MONGODB_URL)
     .then(() => {
