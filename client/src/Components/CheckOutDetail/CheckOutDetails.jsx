@@ -20,7 +20,7 @@ const CheckOutDetails = () => {
   return (
     <div className={styles.checkOutdetail}>
       <div className={styles.checkoutRows}>
-        <div>1. Delivery address</div>
+        <div className={styles.sectionHeading}>1. Delivery address</div>
         <div className={styles.userAddress}>
           Akash Patel 104 kk hh nagar, Lucknow Uttar Pradesh 226025
         </div>
@@ -35,7 +35,7 @@ const CheckOutDetails = () => {
         </div>
       </div>
       <div className={styles.checkoutRows}>
-        <div>2. Payment method</div>
+        <div className={styles.sectionHeading}>2. Payment method</div>
         <div className={styles.paymentMethod}>Pay on delivery ( Cash/Card)</div>
         <div className={styles.orderSummery}>
           <h3>Order Summery</h3>
@@ -54,10 +54,12 @@ const CheckOutDetails = () => {
         </div>
       </div>
       <div className={styles.checkoutRows}>
-        <div>3. Review items and delivery</div>
+        <div className={styles.sectionHeading}>
+          3. Review items and delivery
+        </div>
         <div>
           {CartItems.map((item, index) => (
-            <div key={index}>
+            <div className={styles.productVerification} key={index}>
               <ProductImg img={item.img_url[0]} />
               <div className={styles.delivery}>
                 <h3>{item.product_name}</h3>
@@ -78,7 +80,9 @@ const CheckOutDetails = () => {
           <OrderBtn name="Place your order" />
         </div>
         <div>
-          <h4 className={styles.orderTotal}>Order Total : ₹{Total}</h4>
+          <h4 className={styles.orderTotalFinal}>
+            <span>Order Total :</span> <span>₹{Total}</span>
+          </h4>
           <p>
             By placing your order, you agree to Musicart privacy notice and
             conditions of use

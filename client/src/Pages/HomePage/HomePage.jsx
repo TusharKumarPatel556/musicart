@@ -26,8 +26,6 @@ const HomePage = () => {
 
   const HandleChange = (e) => {
     SetSearchItem(e.target.value);
-    // SetFilters({ ...Filters, product_name: SearchItem });
-    // FilterUpdate();
   };
 
   const GetProductsData = async (Filters) => {
@@ -55,6 +53,21 @@ const HomePage = () => {
         <>
           <div className={styles.page}>
             <AboutPage />
+
+            <div className={styles.offerContainer}>
+              <div className={styles.specialOffer}>
+                <span>
+                  Grab upto 50% off on <br /> Selected headphones
+                </span>
+
+                <button className={styles.offerButton} type="">
+                  Buy Now
+                </button>
+
+                <img src="/images/girl_with_headphone.png" alt="" />
+              </div>
+            </div>
+
             <div className={styles.searchArea}>
               <input
                 placeholder="Search Product"

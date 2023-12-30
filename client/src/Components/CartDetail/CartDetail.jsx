@@ -19,6 +19,11 @@ const CartDetail = () => {
     }
   };
 
+  // console.log("UserCart", UserCart);
+  // console.log("SetUserCart", SetUserCart);
+  // console.log("CartItems", CartItems);
+  // console.log("SetCartItems", SetCartItems);
+
   const HandleSelect = (e, id) => {
     const quantity = e.target.value;
 
@@ -35,7 +40,7 @@ const CartDetail = () => {
 
   return (
     <div>
-      {UserCart ? (
+      {CartItems.length != 0 ? (
         <>
           <div>
             <div className={styles.cartDetail}>

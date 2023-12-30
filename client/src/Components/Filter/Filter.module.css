@@ -1,6 +1,11 @@
 .dropdownMenu {
   margin: 0 10px;
-  width: 170px;
+  width: 180px;
+  z-index: 400;
+  position: relative;
+}
+.dropdownMenu li {
+  list-style-type: none;
 }
 .dropDownbtn {
   cursor: pointer;
@@ -11,16 +16,45 @@
   border-radius: 1000px;
   background-color: #d9d9d9;
 }
-.dropDown {
-  /* margin-left: 5px; */
+.dropDown div {
+  background-color: white;
   cursor: pointer;
-  border: 2px solid #e1e1e1;
+  /* border: 2px solid #e1e1e1; */
 }
+.Options {
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
+}
+.drpdownOptions {
+  z-index: 1000;
+}
+
+.selected {
+  background-color: #0066ff;
+  color: white;
+}
+
 .hide {
   display: none;
 }
 .dropdownMenu li {
   margin: 7px 0px;
+  padding: 6px;
   cursor: pointer;
   font-size: 15px;
+}
+
+@media only screen and (max-width: 500px) and (min-width: 300px) {
+  .dropDownbtn {
+    cursor: pointer;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1000px;
+    background-color: #d9d9d9;
+  }
+  .dropDownbtn span {
+    font-size: 13px;
+  }
 }

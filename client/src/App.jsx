@@ -11,6 +11,7 @@ import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import UserCart from "./Pages/UserCartPage/UserCart";
 import CheckOut from "./Pages/CheckOutPage/CheckOut";
+import MobileNav from "./Components/MobileNav/MobileNav";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
+      <MobileNav />
       <Footer />
     </div>
   );

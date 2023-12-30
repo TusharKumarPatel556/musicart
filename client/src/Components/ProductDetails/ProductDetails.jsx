@@ -34,8 +34,16 @@ const ProductDetails = () => {
 
   return (
     <div className={styles.productDetails}>
-      <p>{Product ? Product.description : "Description Not Available"}</p>
-
+      <p className={styles.productDescription}>
+        {Product ? Product.description : "Description Not Available"}
+      </p>
+      <div className={` ${styles.mobBuybtn} `}>
+        <NavLink to={LoggedIn ? "/usercart" : "/login"}>
+          <button className={`${styles.mobBuy}`} type="">
+            Buy Now
+          </button>
+        </NavLink>
+      </div>
       <div className={styles.detail}>
         <div className={styles.slider}>
           {Product ? (
@@ -68,30 +76,29 @@ const ProductDetails = () => {
         </div>
 
         <div className={styles.productInfo}>
-          <h3>
+          <h3 className={styles.productName}>
             {Product.product_name ? Product.product_name : "Name Not Available"}
           </h3>
           <div className={styles.review}>
             <span>
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
+              <FaStar className={styles.star} />
+              <FaStar className={styles.star} />
+              <FaStar className={styles.star} />
+              <FaStar className={styles.star} />
+              <FaStar className={styles.star} />
             </span>
             <span>(50 Customer reviews)</span>
           </div>
+          <p className={styles.mobileproductDescription}>
+            {Product ? Product.description : "Description Not Available"}
+          </p>
           <h4 className={styles.productPrice}>
             Price - &#8377;
-            {Product.price
-              ? `${String(Product.price).slice(0, 1)},${String(
-                  Product.price
-                ).slice(1)}`
-              : "Price not available"}
+            {Product.price}
           </h4>
           <div className={styles.aboutItem}>
             <p>About this item</p>
-            <ul>
+            <ul className={styles.featuresofItem}>
               {Product.features ? (
                 <>
                   {Product.features.map((item, index) => (

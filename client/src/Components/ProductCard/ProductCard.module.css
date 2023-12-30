@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 21%;
   height: 350px;
-
+  margin-bottom: 30px;
   line-height: 1.6em;
   margin: 2%;
 }
@@ -68,8 +68,8 @@
 
   .gridCardImg {
     padding: 20px;
-    height: 140px;
-    width: 100%;
+    height: 120px;
+    width: 120px;
     background-color: #d4e5ff;
   }
   .gridproductDescription h3 {

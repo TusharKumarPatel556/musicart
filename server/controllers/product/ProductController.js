@@ -15,8 +15,6 @@ const InventoryDetails = async (req, res) => {
 };
 
 const ProductDetailController = async (req, res) => {
-  console.log(req.params.id);
-
   try {
     const products = await ProductData.find({ _id: req.params.id });
     res.status(200).json({
@@ -39,15 +37,6 @@ const FilterProductController = async (req, res) => {
       Sort = null,
       product_name = null,
     } = req.query;
-
-    // const {
-    //   type = null,
-    //   company = null,
-    //   color = null,
-    //   price_min = 0,
-    //   price_max = 1000000000000,
-    //   sorting_criteria = null,
-    // } = req.query;
 
     const sort_type = {};
     const filter = {};

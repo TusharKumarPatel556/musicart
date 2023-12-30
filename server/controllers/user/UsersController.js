@@ -85,7 +85,7 @@ const UserCartListController = async (req, res) => {
     });
 
     if (UserCart) {
-      res.json({
+      return res.json({
         UserCart: UserCart,
       });
     }
@@ -113,7 +113,7 @@ const GetCartController = async (req, res) => {
       CartItem: CartProducts,
     });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       error: error.message,
     });
   }
