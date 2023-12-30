@@ -6,6 +6,7 @@ import styles from "./Login.module.css";
 import ErrorMsg from "../../Utils/ErrorMsg/ErrorMsg";
 import { LoginUser } from "../../Api/UserApi/UserApi";
 import { MusicContext } from "../../Context/Context";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,12 +22,6 @@ const Login = () => {
     email: "",
     password: "",
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      HandleLogin(true);
-    }
-  }, []);
 
   const ValidationSchema = Yup.object({
     email: Yup.string().required("Email Id or Phone Number is Required"),

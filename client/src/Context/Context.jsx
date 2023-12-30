@@ -6,14 +6,14 @@ import { SetCartItem } from "../Api/UserApi/UserApi";
 export const MusicContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const [LoggedIn, SetLoggedIn] = useState(false);
+  const [LoggedIn, SetLoggedIn] = useState(true);
   const [InventoryData, SetInventoryData] = useState([]);
   const [Filters, SetFilters] = useState({});
   const [UserCart, SetUserCart] = useState({});
   const [CartItems, SetCartItems] = useState([]);
 
   const HandleLogin = (parameter) => {
-    SetLoggedIn(parameter);
+    SetLoggedIn(!LoggedIn);
   };
 
   const GetInventory = async () => {
@@ -25,10 +25,8 @@ const DataProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      HandleLogin(true);
-    }
-  });
+    HandleLogin();
+  }, []);
   useEffect(() => {
     SetCartItem(UserCart);
   }, [UserCart]);

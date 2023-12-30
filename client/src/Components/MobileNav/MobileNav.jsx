@@ -12,15 +12,8 @@ const MobileNav = () => {
   const Navigate = useNavigate();
 
   const HandleClick = () => {
-    localStorage.removeItem("token");
-    HandleLogin(false);
+    HandleLogin();
   };
-
-  useEffect(() => {
-    if (LoggedIn == false) {
-      Navigate("/");
-    }
-  }, [LoggedIn]);
 
   return (
     <div className={styles.navBar}>

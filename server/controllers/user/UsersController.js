@@ -67,7 +67,8 @@ const UserLoginController = async (req, res) => {
       res.status(200).json({
         message: `user success`,
         token: jwtToken,
-        cart: user.cart,
+        username: user.name,
+        userid: user.id,
       });
     }
   } catch (err) {
@@ -79,19 +80,29 @@ const UserLoginController = async (req, res) => {
 
 const UserCartListController = async (req, res) => {
   try {
-    const { _id, name, email, mobile, password, cart } = req.body.user;
-    const UserCart = await UserData.findOne({ email: email }).select({
+    const token = req.headers.token;
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+
+    const { _id } = user;
+
+    const UserCart = await UserData.findOne({ _id: _id }).select({
       cart: 1,
     });
 
     if (UserCart) {
       return res.json({
-        UserCart: UserCart,
+        UserCart: UserCart.cart,
+        message: "success",
+        // token: jwtToken,
+      });
+    } else {
+      return res.status(404).json({
+        message: "User not found",
       });
     }
   } catch (error) {
     res.json({
-      UserCart: error.message,
+      message: error.message,
     });
   }
 };
@@ -109,12 +120,12 @@ const GetCartController = async (req, res) => {
     });
 
     res.json({
-      message: "working",
+      message: "success",
       CartItem: CartProducts,
     });
   } catch (error) {
     res.status(500).json({
-      error: error.message,
+      message: error.message,
     });
   }
 };

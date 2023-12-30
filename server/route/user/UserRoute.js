@@ -12,7 +12,7 @@ const UserRouter = express.Router();
 UserRouter.post("/register", UserRegisterController);
 UserRouter.get("/login", UserLoginController);
 UserRouter.get("/get-user-cart", IsUserLoggedin, GetCartController);
-UserRouter.get("/user-cart-list", IsUserLoggedin, UserCartListController);
+UserRouter.get("/user-cart-list", UserCartListController);
 UserRouter.put("/set-user-cart", IsUserLoggedin, SetCartController);
 
 module.exports = UserRouter;

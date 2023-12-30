@@ -22,6 +22,7 @@ export const Register = async (userData) => {
 
 export const LoginUser = async (userData) => {
   try {
+    console.log("request sent");
     const response = await axios({
       method: "get",
       url: `${BaseUrl}/api/user/login`,
@@ -33,6 +34,8 @@ export const LoginUser = async (userData) => {
 
     if (response.status == 200) {
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("name", response.data.username);
+      localStorage.setItem("id", response.data.userid);
       return response;
     }
   } catch (err) {
@@ -68,7 +71,7 @@ export const GetCartItem = async (CartItems) => {
       },
     });
 
-    return response.data.CartItem;
+    return response;
   } catch (err) {
     return err;
   }
@@ -76,17 +79,18 @@ export const GetCartItem = async (CartItems) => {
 
 export const GetCartList = async () => {
   try {
+    console.log("Token", localStorage.getItem("token"));
     const response = await axios({
       method: "get",
-      url: `${BaseUrl}/api/user/login`,
+      url: `${BaseUrl}/api/user/user-cart-list`,
 
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
       },
     });
 
     if (response.status == 200) {
-      localStorage.setItem("token", response.data.token);
       return response;
     }
   } catch (err) {
@@ -94,7 +98,7 @@ export const GetCartList = async () => {
   }
 };
 
-export const Logout = () => {
-  console.log("logout ");
-  localStorage.removeItem("token");
-};
+// export const Logout = () => {
+//   console.log("logout ");
+//   localStorage.removeItem("token");
+// };

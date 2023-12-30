@@ -5,7 +5,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import { MusicContext } from "../../Context/Context";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { Logout } from "../../Api/UserApi/UserApi";
+
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -13,15 +13,9 @@ const Header = () => {
   const Navigate = useNavigate();
 
   const HandleClick = () => {
-    localStorage.removeItem("token");
-    HandleLogin(false);
+    // localStorage.removeItem("token");
+    HandleLogin();
   };
-
-  useEffect(() => {
-    if (LoggedIn == false) {
-      Navigate("/");
-    }
-  }, [LoggedIn]);
 
   return (
     <div>

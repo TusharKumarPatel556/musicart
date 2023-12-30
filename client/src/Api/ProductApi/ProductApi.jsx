@@ -13,7 +13,7 @@ export const AllProducts = async (Filters) => {
       },
     });
 
-    return response.data.products;
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -29,7 +29,7 @@ export const ProductInfo = async (ProductId) => {
       },
     });
 
-    return response.data.products;
+    return response.data;
   } catch (error) {
     return [error.message];
   }

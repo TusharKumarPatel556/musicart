@@ -19,6 +19,7 @@ const ProductDetailController = async (req, res) => {
     const products = await ProductData.find({ _id: req.params.id });
     res.status(200).json({
       products: products,
+      message: "success",
     });
   } catch (error) {
     res.json({
@@ -68,9 +69,10 @@ const FilterProductController = async (req, res) => {
       .countDocuments();
     const products = await ProductData.find(filter).sort(sort_type);
 
-    res.json({
+    res.status(200).json({
       count: SomeDatacount,
       products: products,
+      message: "success",
     });
   } catch (error) {
     res.status(500).json({
