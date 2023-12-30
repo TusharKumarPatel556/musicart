@@ -12,6 +12,11 @@ const Login = () => {
   const { HandleLogin, LoggedIn, UserCart, SetUserCart } =
     useContext(MusicContext);
 
+  console.log("-----------Login Page data--------");
+  console.log("UserCart", UserCart);
+  console.log("LoggedIn", LoggedIn);
+  console.log("-----------Login Page data--------");
+
   const InitialValues = {
     email: "",
     password: "",
@@ -30,11 +35,10 @@ const Login = () => {
 
   const OnSubmit = async (values) => {
     const response = await LoginUser(values);
+
     if (response.data.message === "user success") {
       HandleLogin(LoggedIn);
-      SetUserCart({ ...response.data.cart[0], ...UserCart });
-      console.log("User loggedin", response.data.cart);
-      console.log("User loggedin", UserCart);
+
       navigate("/");
     }
   };

@@ -13,7 +13,13 @@ const { ErrorHandler, NotFound } = require("./middlewares/error/ErrorHandler");
 //MiddleWares
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-app.use(cors());
+
+const CorsRules = {
+  origin: "http://localhost:5173",
+  methods: "GET, POST, PUT",
+  optionsSuccessStatus: 204,
+};
+app.use(cors(CorsRules));
 
 // routes
 app.use("/api/products", ProductRouter);

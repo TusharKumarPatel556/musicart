@@ -13,7 +13,6 @@ const CartDetail = () => {
   const CartData = async (CartItems) => {
     try {
       const response = await GetCartItem(UserCart);
-      console.log("Got cart data", response);
       SetCartItems(response);
     } catch (error) {
       console.log(error);
@@ -26,9 +25,9 @@ const CartDetail = () => {
     SetUserCart({ ...UserCart, [id]: quantity });
   };
 
-  useEffect(() => {
-    console.log("Cart Items", CartItems);
-  }, [CartItems]);
+  // useEffect(() => {
+  //   console.log("Cart Items", CartItems);
+  // }, [CartItems]);
 
   useEffect(() => {
     CartData(CartItems);
@@ -36,12 +35,12 @@ const CartDetail = () => {
 
   return (
     <div>
-      {CartItems ? (
+      {UserCart ? (
         <>
           <div>
             <div className={styles.cartDetail}>
               {CartItems.map((item, index) => (
-                <>
+                <div key={index}>
                   <div className={styles.priceDistribution}>
                     <ProductImg img={item.img_url[0]} />
                     <div className={styles.purchaseInfo}>
@@ -115,7 +114,7 @@ const CartDetail = () => {
                       </span>
                     </h4>
                   </div>
-                </>
+                </div>
               ))}
               <NavLink to="/checkout">
                 <div className={styles.placeOrder}>

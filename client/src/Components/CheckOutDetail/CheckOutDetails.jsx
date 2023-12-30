@@ -17,8 +17,6 @@ const CheckOutDetails = () => {
     });
   });
 
-  console.log("These are the cart items", Total);
-
   return (
     <div className={styles.checkOutdetail}>
       <div className={styles.checkoutRows}>
@@ -43,7 +41,7 @@ const CheckOutDetails = () => {
           <h3>Order Summery</h3>
 
           {CartItems.map((item, index) => (
-            <h4>
+            <h4 key={index}>
               <span>{item.product_name}:</span>
               <span>&#8377;{item.price}</span>
             </h4>
@@ -59,7 +57,7 @@ const CheckOutDetails = () => {
         <div>3. Review items and delivery</div>
         <div>
           {CartItems.map((item, index) => (
-            <>
+            <div key={index}>
               <ProductImg img={item.img_url[0]} />
               <div className={styles.delivery}>
                 <h3>{item.product_name}</h3>
@@ -67,7 +65,7 @@ const CheckOutDetails = () => {
                 <p>{item.availability}</p>
                 <h4>Estimated delivery:Monday-FREE Standard Delivery</h4>
               </div>
-            </>
+            </div>
           ))}
         </div>
         <div className={styles.orderTotal}>

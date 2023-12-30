@@ -20,7 +20,15 @@ const DataProvider = ({ children }) => {
     const response = await InventoryInfo();
     SetInventoryData(response);
   };
+  useEffect(() => {
+    GetInventory();
+  }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      HandleLogin(true);
+    }
+  });
   useEffect(() => {
     SetCartItem(UserCart);
   }, [UserCart]);

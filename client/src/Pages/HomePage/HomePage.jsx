@@ -26,7 +26,8 @@ const HomePage = () => {
 
   const HandleChange = (e) => {
     SetSearchItem(e.target.value);
-    FilterUpdate();
+    // SetFilters({ ...Filters, product_name: SearchItem });
+    // FilterUpdate();
   };
 
   const GetProductsData = async (Filters) => {
@@ -43,47 +44,68 @@ const HomePage = () => {
     const FilterUpdate = setTimeout(() => {
       SetFilters({ ...Filters, product_name: SearchItem });
     }, 2000);
+    return () => {
+      clearTimeout(FilterUpdate);
+    };
   }, [SearchItem]);
 
   return (
-    <div className={styles.page}>
-      <AboutPage />
-      <div className={styles.searchArea}>
-        <input
-          placeholder="Search Product"
-          className={styles.searchConsole}
-          onChange={HandleChange}
-          value={SearchItem}
-        />
-        <GoSearch className={styles.searchIcon} />
-      </div>
+    <div>
+      {Products ? (
+        <>
+          <div className={styles.page}>
+            <AboutPage />
+            <div className={styles.searchArea}>
+              <input
+                placeholder="Search Product"
+                className={styles.searchConsole}
+                onChange={HandleChange}
+                value={SearchItem}
+              />
+              <GoSearch className={styles.searchIcon} />
+            </div>
 
-      <div className={styles.productArea}>
-        <div className={styles.viewOption}>
-          <IoGridSharp onClick={HandleGridClick} className={styles.viewtype} />
-          <FaThList onClick={HandleListClick} className={styles.viewtype} />
-        </div>
+            <div className={styles.productArea}>
+              <div className={styles.viewOption}>
+                <IoGridSharp
+                  onClick={HandleGridClick}
+                  className={styles.viewtype}
+                />
+                <FaThList
+                  onClick={HandleListClick}
+                  className={styles.viewtype}
+                />
+              </div>
 
-        <div className={styles.filters}>
-          {InventoryData
-            ? InventoryData.map((item, index) => (
-                <Filter key={index} list={item.list} name={item.filter_name} />
-              ))
-            : null}
-        </div>
+              <div className={styles.filters}>
+                {InventoryData
+                  ? InventoryData.map((item, index) => (
+                      <Filter
+                        key={index}
+                        list={item.list}
+                        name={item.filter_name}
+                      />
+                    ))
+                  : null}
+              </div>
 
-        <div>
-          <Filter />
-        </div>
-      </div>
+              <div>
+                <Filter />
+              </div>
+            </div>
 
-      <div className={styles.productContainer}>
-        {Products
-          ? Products.map((product, index) => (
-              <ProductCard View={View} product={product} key={index} />
-            ))
-          : null}
-      </div>
+            <div className={styles.productContainer}>
+              {Products
+                ? Products.map((product, index) => (
+                    <ProductCard View={View} product={product} key={index} />
+                  ))
+                : null}
+            </div>
+          </div>
+        </>
+      ) : (
+        <div>Loading data ...</div>
+      )}
     </div>
   );
 };

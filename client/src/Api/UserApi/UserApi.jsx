@@ -73,6 +73,27 @@ export const GetCartItem = async (CartItems) => {
     return err;
   }
 };
+
+export const GetCartList = async () => {
+  try {
+    const response = await axios({
+      method: "get",
+      url: `${BaseUrl}/api/user/login`,
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status == 200) {
+      localStorage.setItem("token", response.data.token);
+      return response;
+    }
+  } catch (err) {
+    return err;
+  }
+};
+
 export const Logout = () => {
   console.log("logout ");
   localStorage.removeItem("token");

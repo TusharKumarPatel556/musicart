@@ -28,7 +28,7 @@ export const ProductInfo = async (ProductId) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
+
     return response.data.products;
   } catch (error) {
     return [error.message];

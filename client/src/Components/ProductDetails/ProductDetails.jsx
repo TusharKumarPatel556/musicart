@@ -121,9 +121,11 @@ const ProductDetails = () => {
                 Add to cart
               </button>
             ) : (
-              <button type="">Login / Signup</button>
+              <NavLink to="/login">
+                <button type="">Login / Signup</button>{" "}
+              </NavLink>
             )}
-            <NavLink to="/usercart">
+            <NavLink to={LoggedIn ? "/usercart" : "/login"}>
               <button type="">Buy Now</button>
             </NavLink>
           </div>

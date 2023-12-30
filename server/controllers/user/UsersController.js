@@ -3,7 +3,6 @@ const ProductData = require("../../model/product/ProductSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//Register Controller
 const UserRegisterController = async (req, res) => {
   try {
     const { name, email, mobile, password } = req.body;
@@ -48,7 +47,6 @@ const UserRegisterController = async (req, res) => {
   }
 };
 
-//Login Controller
 const UserLoginController = async (req, res) => {
   try {
     const { email, password } = req.query;
@@ -79,14 +77,29 @@ const UserLoginController = async (req, res) => {
   }
 };
 
+const UserCartListController = async (req, res) => {
+  try {
+    const { _id, name, email, mobile, password, cart } = req.body.user;
+    const UserCart = await UserData.findOne({ email: email }).select({
+      cart: 1,
+    });
+
+    if (UserCart) {
+      res.json({
+        UserCart: UserCart,
+      });
+    }
+  } catch (error) {
+    res.json({
+      UserCart: error.message,
+    });
+  }
+};
+
 const GetCartController = async (req, res) => {
-  console.log("get item", req.query);
   try {
     const ItemList = Object.keys(req.query);
     const Quantities = Object.values(req.query);
-
-    console.log("get item", ItemList);
-    console.log("get item", Quantities);
     const CartProducts = await ProductData.find({
       _id: { $in: ItemList },
     });
@@ -108,12 +121,10 @@ const GetCartController = async (req, res) => {
 
 const SetCartController = async (req, res) => {
   try {
-    // console.log("cart add request");
     const usercart = req.query;
     const { _id, name, email, mobile, password, cart } = req.body.user;
     const user = await UserData.find({ email: email });
-    // console.log("old cart items", cart, "new cart item", usercart);
-    // { ...cart[0], ...usercart }
+
     if (user) {
       const result = await UserData.updateOne(
         { _id: _id },
@@ -127,7 +138,6 @@ const SetCartController = async (req, res) => {
     }
     res.json({
       message: "working",
-      data: CartItem,
     });
   } catch (error) {}
 };
@@ -135,6 +145,7 @@ const SetCartController = async (req, res) => {
 module.exports = {
   UserRegisterController,
   UserLoginController,
+  UserCartListController,
   GetCartController,
   SetCartController,
 };

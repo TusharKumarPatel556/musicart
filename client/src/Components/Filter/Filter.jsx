@@ -3,7 +3,6 @@ import { FaChevronDown } from "react-icons/fa";
 import { useState, useEffect, useContext } from "react";
 import { MusicContext } from "../../Context/Context";
 import styles from "./Filter.module.css";
-import { AllProducts } from "../../Api/ProductApi/ProductApi";
 
 const Filter = (props) => {
   const [Display, SetDisplay] = useState(false);

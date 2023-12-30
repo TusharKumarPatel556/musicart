@@ -15,9 +15,7 @@ const Header = () => {
     localStorage.removeItem("token");
     HandleLogin(false);
   };
-  if (localStorage.getItem("token")) {
-    HandleLogin(true);
-  }
+
   useEffect(() => {
     if (LoggedIn == false) {
       Navigate("/");
