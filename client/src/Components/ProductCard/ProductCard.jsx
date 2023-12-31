@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ProductCard.module.css";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const ProductCard = ({ product, View }) => {
   const Navigate = useNavigate();
@@ -16,9 +17,15 @@ const ProductCard = ({ product, View }) => {
       className={View === "grid" ? styles.gridCard : styles.listCard}
     >
       <div
-        className={View === "grid" ? styles.gridCardImg : styles.listCardImg}
+        className={` ${styles.smallCartbox}  ${
+          View === "grid" ? styles.gridCardImg : styles.listCardImg
+        }`}
       >
         <img src={product.img_url[0]} alt="Product Description" />
+
+        <div className={styles.cartBoxcontainer}>
+          <MdOutlineAddShoppingCart className={styles.cartBox} />
+        </div>
       </div>
       <div
         className={

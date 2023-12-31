@@ -58,6 +58,28 @@
   border: none;
   background-color: var(--primary-colour);
 }
+
+.smallCartbox {
+  position: relative;
+}
+.cartBoxcontainer {
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 4%;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cartBox {
+  color: green;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
 @media only screen and (max-width: 500px) and (min-width: 300px) {
   .gridCard {
     display: flex;
@@ -79,5 +101,26 @@
   }
   .gridproductDescription h4 {
     font-size: 14px;
+  }
+
+  .smallCartbox {
+    position: relative;
+  }
+  .cartBoxcontainer {
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 4%;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cartBox {
+    color: green;
+    font-size: 16px;
+    font-weight: bolder;
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./OrderPlaced.module.css";
+import { NavLink } from "react-router-dom";
 
 const OrderPlaced = () => {
   return (
@@ -20,7 +21,11 @@ const OrderPlaced = () => {
             You will be receiving a confirmation email with order details
           </h4>
           <div className={styles.goHome}>
-            <button className={styles.homeButton}>Go back to Home page</button>
+            <NavLink to="/">
+              <button className={styles.homeButton}>
+                Go back to Home page
+              </button>
+            </NavLink>
           </div>
         </div>
       </div>
