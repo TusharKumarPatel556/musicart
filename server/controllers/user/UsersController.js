@@ -30,7 +30,7 @@ const UserRegisterController = async (req, res) => {
         });
 
         res.status(200).json({
-          message: "User created",
+          message: "success",
           token: jwtToken,
         });
       }
@@ -97,7 +97,7 @@ const UserCartListController = async (req, res) => {
       });
     } else {
       return res.status(404).json({
-        message: "User not found",
+        message: "Invalid User Credentials",
       });
     }
   } catch (error) {

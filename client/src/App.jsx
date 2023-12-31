@@ -12,6 +12,7 @@ import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import UserCart from "./Pages/UserCartPage/UserCart";
 import CheckOut from "./Pages/CheckOutPage/CheckOut";
 import MobileNav from "./Components/MobileNav/MobileNav";
+import OrderPlaced from "./Pages/OrderPlaced/OrderPlaced";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/usercart" element={<UserCart />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/*" element={<ErrorPage />} />
+        <Route path="/orderplaced" element={<OrderPlaced />} />
       </Routes>
       <MobileNav />
       <Footer />

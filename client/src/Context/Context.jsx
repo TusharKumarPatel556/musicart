@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
 import { InventoryInfo } from "../Api/ProductApi/ProductApi";
 import { SetCartItem } from "../Api/UserApi/UserApi";
@@ -12,17 +13,33 @@ const DataProvider = ({ children }) => {
   const [UserCart, SetUserCart] = useState({});
   const [CartItems, SetCartItems] = useState([]);
 
+  // const Navigate = useNavigate();
+
   const HandleLogin = (parameter) => {
     SetLoggedIn(!LoggedIn);
   };
 
-  const GetInventory = async () => {
-    const response = await InventoryInfo();
-    SetInventoryData(response);
-  };
-  useEffect(() => {
-    GetInventory();
-  }, []);
+  // const GetInventory = async () => {
+  //   const response = await InventoryInfo();
+  //   SetInventoryData(response);
+  // };
+
+  useEffect(
+    () => {
+      if (localStorage.getItem("token")) {
+        SetLoggedIn(true);
+      } else {
+        SetLoggedIn(false);
+        // Navigate("/login");
+      }
+    },
+    [UserCart],
+    [CartItems]
+  );
+
+  // useEffect(() => {
+  //   GetInventory();
+  // }, []);
 
   useEffect(() => {
     HandleLogin();
@@ -36,6 +53,7 @@ const DataProvider = ({ children }) => {
     SetLoggedIn,
     HandleLogin,
     InventoryData,
+    SetInventoryData,
     Filters,
     SetFilters,
     UserCart,

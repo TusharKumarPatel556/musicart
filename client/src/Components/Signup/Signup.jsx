@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./Signup.module.css";
 import ErrorMsg from "../../Utils/ErrorMsg/ErrorMsg";
 import { Register } from "../../Api/UserApi/UserApi";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const [message, setmessage] = useState("");
+  const Navigate = useNavigate();
+
   const InitialValues = {
     name: "",
     email: "",
@@ -22,7 +26,12 @@ const Signup = () => {
 
   const OnSubmit = async (values) => {
     console.log(values);
-    Register(values);
+    const response = await Register(values);
+    if (response == "success") {
+      Navigate("/");
+    } else {
+      setmessage(response);
+    }
   };
 
   return (
@@ -104,6 +113,8 @@ const Signup = () => {
                 Continue
               </button>
             </div>
+
+            <h3 className={styles.userExists}> {message}</h3>
 
             <p className={styles.continueMessage}>
               By continuing, you agree to Musicart privacy notice and conditions

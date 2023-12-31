@@ -63,6 +63,12 @@
   font-size: 12px;
 }
 
+.userExists {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
+
 @media (max-width: 499px) {
   .signin {
     font-size: 30px;

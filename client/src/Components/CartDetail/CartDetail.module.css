@@ -9,6 +9,12 @@
   justify-content: center;
   padding: 10px 5px;
 }
+
+.cartProductname .productName {
+  overflow-wrap: break-word;
+  max-width: 150px;
+}
+
 .purchaseInfo {
   display: flex;
 }
@@ -38,14 +44,22 @@
 }
 
 .subtotal {
-  display: grid;
-  grid-template-columns: 6fr 3fr 3fr 3fr;
+  display: flex;
 }
+
+.subtotal > div {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
 .placeOrder {
   display: flex;
   justify-content: end;
   margin-top: 50px;
   padding-inline: 260px;
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 500px) and (min-width: 300px) {

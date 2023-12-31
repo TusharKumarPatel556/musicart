@@ -3,6 +3,7 @@ import styles from "./CheckOutDetails.module.css";
 import OrderBtn from "../../Utils/OrderPLaceBtn/OrderBtn";
 import ProductImg from "../../Utils/CartPrdctImg/ProductImg";
 import { MusicContext } from "../../Context/Context";
+import { NavLink } from "react-router-dom";
 
 const CheckOutDetails = () => {
   const { UserCart, SetUserCart, CartItems, SetCartItems } =
@@ -25,7 +26,10 @@ const CheckOutDetails = () => {
           Akash Patel 104 kk hh nagar, Lucknow Uttar Pradesh 226025
         </div>
         <div>
-          <OrderBtn name="Place your order" />
+          <NavLink to="/orderplaced">
+            <OrderBtn name="Place your order" />
+          </NavLink>
+
           <div>
             <p>
               By placing your order, you agree to Musicart privacy notice and
@@ -77,7 +81,9 @@ const CheckOutDetails = () => {
 
       <div className={styles.finalOrder}>
         <div>
-          <OrderBtn name="Place your order" />
+          <NavLink to="/orderplaced">
+            <OrderBtn name="Place your order" />
+          </NavLink>
         </div>
         <div>
           <h4 className={styles.orderTotalFinal}>

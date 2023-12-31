@@ -1,0 +1,46 @@
+.brandLogo {
+  margin: 50px;
+}
+
+.confetiCardContainer {
+  display: flex;
+  justify-content: center;
+  line-height: 40px;
+  height: 100%;
+}
+.confetiCard {
+  width: 450px;
+  display: flex;
+
+  flex-direction: column;
+}
+.confetiImg {
+  text-align: center;
+}
+.confetiImg img {
+  height: 110px;
+}
+
+.successfulMsg {
+  font-size: 25px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.confEmail {
+  text-align: center;
+  color: #969696;
+}
+
+.goHome {
+  text-align: center;
+}
+.goHome .homeButton {
+  border: none;
+  text-align: center;
+  padding: 10px;
+  background-color: #2e0052;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+}

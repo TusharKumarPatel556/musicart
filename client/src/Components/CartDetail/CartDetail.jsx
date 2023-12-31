@@ -11,11 +11,12 @@ const CartDetail = () => {
   const { UserCart, SetUserCart, CartItems, SetCartItems, LoggedIn } =
     useContext(MusicContext);
   const [error, Seterror] = useState("");
-  console.log("Cart Details  UserCart", UserCart);
-  const Quant = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [Total, SetTotal] = useState(0);
+  // console.log("Cart Details  UserCart", UserCart);
+  const Quant = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const CartList = async (CartItems) => {
     const cartlist = await GetCartList();
-    console.log("catlist", cartlist);
+    // console.log("catlist", cartlist);
     if (cartlist.data.message == "success") {
       SetUserCart({ ...CartItems, ...cartlist.data.UserCart[0] });
     } else {
@@ -25,9 +26,9 @@ const CartDetail = () => {
 
   const CartData = async () => {
     const response = await GetCartItem(UserCart);
-    console.log("All products you purchased", response);
+    // console.log("All products you purchased", response);
     if (response.data.message == "success") {
-      console.log("All products you purchased", response);
+      // console.log("All products you purchased", response);
       SetCartItems(response.data.CartItem);
     } else {
       Seterror("error");
@@ -35,12 +36,21 @@ const CartDetail = () => {
   };
 
   useEffect(() => {
+    let price = 0;
+    CartItems.map((item, index) => {
+      price = item.price * item.quantity + price;
+      SetTotal(price);
+    });
+  }, [CartItems]);
+
+  useEffect(() => {
     CartData();
-  }, []);
+  }, [UserCart]);
 
   // console.log("UserCart", UserCart);
   // console.log("SetUserCart", SetUserCart);
-  // console.log("CartItems", CartItems);
+  //
+  console.log("CartItems", CartItems);
   // console.log("SetCartItems", SetCartItems);
 
   const HandleSelect = (e, id) => {
@@ -55,7 +65,7 @@ const CartDetail = () => {
 
   useEffect(() => {
     CartList();
-  }, []);
+  }, [LoggedIn]);
 
   return (
     <div>
@@ -71,7 +81,9 @@ const CartDetail = () => {
                         <ProductImg img={item.img_url[0]} />
                         <div className={styles.purchaseInfo}>
                           <div className={styles.cartProductname}>
-                            <h3>{item.product_name}</h3>
+                            <h3 className={styles.productName}>
+                              {item.product_name}
+                            </h3>
                             <p>Color:{item.color}</p>
                             <br />
                             <p>{item.availability}</p>
@@ -105,14 +117,14 @@ const CartDetail = () => {
                           <div className={styles.priceDetail}>
                             <h3>PRICE DETAILS</h3>
                             <p>
-                              <span>Total MRP</span>{" "}
+                              <span>Total MRP</span>
                               <span>&#8377;{item.price * item.quantity}</span>
                             </p>
                             <p>
                               <span>Discount on MRP</span> <span>&#8377;0</span>
                             </p>
                             <p>
-                              <span>Convenience Fee</span>{" "}
+                              <span>Convenience Fee</span>
                               <span>&#8377;45</span>
                             </p>
                           </div>
@@ -127,28 +139,28 @@ const CartDetail = () => {
                           <p>Convenience fee &nbsp;&nbsp;&#8377;45</p>
                         </div>
                       </div>
-                      <div className={styles.subtotal}>
-                        <h4
-                          style={{ textAlign: "center", marginLeft: "150px" }}
-                        >
-                          1 Item
-                        </h4>
-                        <h4>&#8377;{item.price}</h4>
-                        <h4>Total Amount</h4>
-                        <h4>
-                          &#8377;{item.price * Number(item.quantity) + 45}
-                        </h4>
-                      </div>
-                      <div className={styles.subtotalMobile}>
-                        <h4>
-                          <span>Total:</span>
-                          <span>
-                            &#8377;{item.price * Number(item.quantity) + 45}
-                          </span>
-                        </h4>
-                      </div>
                     </div>
                   ))}
+
+                  <div className={styles.subtotal}>
+                    <div>
+                      <h4 style={{ textAlign: "center", marginLeft: "150px" }}>
+                        {CartItems.length} Item
+                      </h4>
+                      <h4>&#8377;{Total}</h4>
+
+                      <h4>Total Amount &nbsp;:</h4>
+                      <h4 style={{ marginRight: "50px" }}>
+                        &#8377;{Total + 45}
+                      </h4>
+                    </div>
+                  </div>
+                  <div className={styles.subtotalMobile}>
+                    <h4>
+                      <span>Total:</span>
+                      <span>{Total + 45}</span>
+                    </h4>
+                  </div>
                   <NavLink to="/checkout">
                     <div className={styles.placeOrder}>
                       <OrderBtn name="PLACE ORDER" />
@@ -158,7 +170,7 @@ const CartDetail = () => {
               </div>
             </>
           ) : (
-            <div>Loading data</div>
+            <div>Add Products to Your Cart</div>
           )}
         </>
       ) : (

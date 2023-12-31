@@ -12,6 +12,7 @@ export const Register = async (userData) => {
         "Content-Type": "application/json",
       },
     });
+
     localStorage.setItem("token", response.data.token);
 
     return response.data.message;

@@ -62,3 +62,8 @@
   margin-top: 30px;
   font-size: 12px;
 }
+.userExists {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}

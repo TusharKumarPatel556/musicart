@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -12,11 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { HandleLogin, LoggedIn, UserCart, SetUserCart } =
     useContext(MusicContext);
-
-  console.log("-----------Login Page data--------");
-  console.log("UserCart", UserCart);
-  console.log("LoggedIn", LoggedIn);
-  console.log("-----------Login Page data--------");
+  const [message, setmessage] = useState("");
 
   const InitialValues = {
     email: "",
@@ -30,11 +26,13 @@ const Login = () => {
 
   const OnSubmit = async (values) => {
     const response = await LoginUser(values);
-
+    console.log("login response", response);
     if (response.data.message === "user success") {
-      HandleLogin(LoggedIn);
+      HandleLogin(true);
 
       navigate("/");
+    } else {
+      setmessage(response.data.message);
     }
   };
 
@@ -83,6 +81,8 @@ const Login = () => {
                 Continue
               </button>
             </div>
+
+            <h3 className={styles.userExists}> {message}</h3>
 
             <div className={styles.privacyPolicy}>
               <p>

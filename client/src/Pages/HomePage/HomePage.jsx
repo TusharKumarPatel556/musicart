@@ -9,10 +9,11 @@ import AboutPage from "../../Utils/AboutPageContainer/AboutPage";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { AllProducts } from "../../Api/ProductApi/ProductApi";
 import { MusicContext } from "../../Context/Context";
+import { InventoryInfo } from "../../Api/ProductApi/ProductApi";
 
 const HomePage = () => {
   const [SearchItem, SetSearchItem] = useState("");
-  const { InventoryData, Filters, SetFilters, LoggedIn } =
+  const { InventoryData, SetInventoryData, Filters, SetFilters, LoggedIn } =
     useContext(MusicContext);
   const [Products, SetProducts] = useState([]);
   const [View, SetView] = useState("grid");
@@ -41,19 +42,34 @@ const HomePage = () => {
       Seterror("Failed to get data");
     }
   };
+  const GetInventory = async () => {
+    const response = await InventoryInfo();
+    SetInventoryData(response);
+  };
 
   useEffect(() => {
-    GetProductsData(Filters);
-  }, [Filters]);
+    GetInventory();
+  }, []);
+  useEffect(
+    () => {
+      GetProductsData(Filters);
+    },
+    [Filters],
+    [LoggedIn]
+  );
 
-  useEffect(() => {
-    const FilterUpdate = setTimeout(() => {
-      SetFilters({ ...Filters, product_name: SearchItem });
-    }, 2000);
-    return () => {
-      clearTimeout(FilterUpdate);
-    };
-  }, [SearchItem]);
+  useEffect(
+    () => {
+      const FilterUpdate = setTimeout(() => {
+        SetFilters({ ...Filters, product_name: SearchItem });
+      }, 2000);
+      return () => {
+        clearTimeout(FilterUpdate);
+      };
+    },
+    [SearchItem],
+    [LoggedIn]
+  );
 
   return (
     <div>

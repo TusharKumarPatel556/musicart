@@ -15,7 +15,7 @@ const ProductDetails = () => {
   const { UserCart, SetUserCart } = useContext(MusicContext);
   const [error, Seterror] = useState("");
 
-  console.log("Product Details   UserCart", UserCart);
+  console.log("Product Details   LoggedIn", LoggedIn);
 
   const GetDetails = async (ProductId) => {
     const response = await ProductInfo(ProductId);
@@ -52,6 +52,10 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      SetLoggedIn(true);
+    }
+
     GetDetails(ProductId);
   }, []);
 
