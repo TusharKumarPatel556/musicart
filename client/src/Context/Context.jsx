@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
-import { InventoryInfo } from "../Api/ProductApi/ProductApi";
+
 import { SetCartItem } from "../Api/UserApi/UserApi";
 
 export const MusicContext = createContext();
@@ -12,17 +12,17 @@ const DataProvider = ({ children }) => {
   const [Filters, SetFilters] = useState({});
   const [UserCart, SetUserCart] = useState({});
   const [CartItems, SetCartItems] = useState([]);
-
+  const [PageName, SetPageName] = useState("");
   // const Navigate = useNavigate();
 
   const HandleLogin = (parameter) => {
-    SetLoggedIn(!LoggedIn);
+    // SetLoggedIn(!LoggedIn);
+    if (localStorage.getItem("token")) {
+      SetLoggedIn(true);
+    } else {
+      SetLoggedIn(false);
+    }
   };
-
-  // const GetInventory = async () => {
-  //   const response = await InventoryInfo();
-  //   SetInventoryData(response);
-  // };
 
   useEffect(
     () => {
@@ -30,16 +30,11 @@ const DataProvider = ({ children }) => {
         SetLoggedIn(true);
       } else {
         SetLoggedIn(false);
-        // Navigate("/login");
       }
     },
     [UserCart],
     [CartItems]
   );
-
-  // useEffect(() => {
-  //   GetInventory();
-  // }, []);
 
   useEffect(() => {
     HandleLogin();
@@ -60,6 +55,8 @@ const DataProvider = ({ children }) => {
     SetUserCart,
     CartItems,
     SetCartItems,
+    PageName,
+    SetPageName,
   };
 
   return (

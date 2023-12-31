@@ -6,15 +6,22 @@ import { MusicContext } from "../../Context/Context";
 import { NavLink } from "react-router-dom";
 
 const CheckOutDetails = () => {
-  const { UserCart, SetUserCart, CartItems, SetCartItems } =
-    useContext(MusicContext);
+  const {
+    UserCart,
+    SetUserCart,
+    CartItems,
+    SetCartItems,
+    PageName,
+    SetPageName,
+  } = useContext(MusicContext);
   const [Total, SetTotal] = useState(0);
   let price = 0;
 
   useEffect(() => {
+    SetPageName("/Checkout");
     CartItems.map((item, index) => {
       price = item.price * item.quantity + price;
-      SetTotal(price);
+      SetTotal(price.toFixed(2));
     });
   });
 
@@ -47,7 +54,7 @@ const CheckOutDetails = () => {
           {CartItems.map((item, index) => (
             <h4 key={index}>
               <span>{item.product_name}:</span>
-              <span>&#8377;{item.price}</span>
+              <span>&#8377;{item.price.toFixed(2)}</span>
             </h4>
           ))}
 
@@ -80,12 +87,12 @@ const CheckOutDetails = () => {
       </div>
 
       <div className={styles.finalOrder}>
-        <div>
+        <div className={styles.columnCenter}>
           <NavLink to="/orderplaced">
             <OrderBtn name="Place your order" />
           </NavLink>
         </div>
-        <div>
+        <div className={styles.columnCenter}>
           <h4 className={styles.orderTotalFinal}>
             <span>Order Total :</span> <span>₹{Total}</span>
           </h4>

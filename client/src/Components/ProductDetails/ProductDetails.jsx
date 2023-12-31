@@ -10,7 +10,8 @@ import { MusicContext } from "../../Context/Context";
 const ProductDetails = () => {
   const [Product, SetProduct] = useState({});
   const { ProductId } = useParams();
-  const { LoggedIn, SetLoggedIn } = useContext(MusicContext);
+  const { LoggedIn, SetLoggedIn, PageName, SetPageName } =
+    useContext(MusicContext);
   const Navigate = useNavigate();
   const { UserCart, SetUserCart } = useContext(MusicContext);
   const [error, Seterror] = useState("");
@@ -26,6 +27,12 @@ const ProductDetails = () => {
       Seterror("Failed to get data");
     }
   };
+
+  useEffect(() => {
+    if (Product) {
+      SetPageName(`/${Product.product_name}`);
+    }
+  }, [Product]);
 
   const AddItem = () => {
     let quantity = 1;

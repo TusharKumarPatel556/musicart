@@ -1,3 +1,9 @@
+.columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .checkOutdetail {
   margin-top: 35px;
 }
@@ -58,8 +64,12 @@ h4 {
 .orderTotalFinal {
   display: flex;
   justify-content: space-between;
+  /* align-items: center; */
   color: #b52b00;
   margin-top: 30px;
+}
+.orderTotalFinal span {
+  margin-right: 100px;
 }
 .orderTotal span:nth-child(2) {
   padding: 0 80px;

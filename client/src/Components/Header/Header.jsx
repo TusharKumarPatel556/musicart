@@ -13,7 +13,7 @@ const Header = () => {
   const Navigate = useNavigate();
 
   const HandleClick = () => {
-    // localStorage.removeItem("token");
+    localStorage.removeItem("token");
     HandleLogin();
   };
 
