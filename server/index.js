@@ -15,7 +15,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 const CorsRules = {
-  origin: "https://musicart-5gnw.onrender.com",
+  origin: "*",
   methods: "GET, POST, PUT",
   optionsSuccessStatus: 204,
 };
