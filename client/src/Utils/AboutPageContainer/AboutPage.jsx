@@ -11,7 +11,15 @@ const AboutPage = () => {
   return (
     <div className={styles.aboutPage}>
       <div className={styles.pageName}>
-        <img src="/images/logo.png" alt="Logo" /> <h5>Home{PageName}</h5>
+        <NavLink>
+          <img src="/images/logo.png" alt="Logo" />{" "}
+        </NavLink>
+        <h5>
+          <NavLink style={{ color: "black" }} to="/">
+            Home
+          </NavLink>
+          {PageName}
+        </h5>
       </div>
       <NavLink to="/usercart"> {LoggedIn ? <ViewCartBtn /> : null}</NavLink>
     </div>

@@ -13,8 +13,15 @@ import { InventoryInfo } from "../../Api/ProductApi/ProductApi";
 
 const HomePage = () => {
   const [SearchItem, SetSearchItem] = useState("");
-  const { InventoryData, SetInventoryData, Filters, SetFilters, LoggedIn } =
-    useContext(MusicContext);
+  const {
+    InventoryData,
+    SetInventoryData,
+    Filters,
+    SetFilters,
+    LoggedIn,
+    PageName,
+    SetPageName,
+  } = useContext(MusicContext);
   const [Products, SetProducts] = useState([]);
   const [View, SetView] = useState("grid");
   const [error, Seterror] = useState("");
@@ -48,6 +55,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    SetPageName("");
     GetInventory();
   }, []);
   useEffect(

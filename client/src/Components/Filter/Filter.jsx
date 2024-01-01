@@ -68,16 +68,16 @@ const Filter = (props) => {
             <li
               name="Sort"
               onClick={(event) => HandleClick(event)}
-              value="price,-1"
-              className={Values.includes("price,-1") ? styles.selected : ""}
+              value="price,1"
+              className={Values.includes("price,1") ? styles.selected : ""}
             >
               Price:Lowest
             </li>
             <li
               name="Sort"
               onClick={(event) => HandleClick(event)}
-              value="price,1"
-              className={Values.includes("price,1") ? styles.selected : ""}
+              value="price,-1"
+              className={Values.includes("price,-1") ? styles.selected : ""}
             >
               Price:Highest
             </li>

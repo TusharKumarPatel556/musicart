@@ -15,6 +15,7 @@ const ProductDetails = () => {
   const Navigate = useNavigate();
   const { UserCart, SetUserCart } = useContext(MusicContext);
   const [error, Seterror] = useState("");
+  const [CartString, SetCartString] = useState("");
 
   console.log("Product Details   LoggedIn", LoggedIn);
 
@@ -34,22 +35,26 @@ const ProductDetails = () => {
     }
   }, [Product]);
 
-  const AddItem = () => {
-    let quantity = 1;
-    if (UserCart[ProductId]) {
-      quantity = Number(UserCart[ProductId]) + 1;
-    }
-    SetUserCart({ ...UserCart, [ProductId]: quantity });
-    return "added";
-  };
+  // const AddItem = () => {
+  //   let quantity = 1;
+  //   if (UserCart[ProductId]) {
+  //     quantity = Number(UserCart[ProductId]) + 1;
+  //   }
+  //   SetUserCart({ ...UserCart, [ProductId]: quantity });
+  //   return "added";
+  // };
 
   const AddtoCart = async (action) => {
     if ("add") {
+      SetCartString("added");
       let quantity = 1;
       if (UserCart[ProductId]) {
         quantity = Number(UserCart[ProductId]) + 1;
       }
       SetUserCart({ ...UserCart, [ProductId]: quantity });
+      setTimeout(() => {
+        SetCartString("");
+      }, 1000);
     } else {
       const resp = AddItem();
       if (resp == "added") {
@@ -62,7 +67,6 @@ const ProductDetails = () => {
     if (localStorage.getItem("token")) {
       SetLoggedIn(true);
     }
-
     GetDetails(ProductId);
   }, []);
 
@@ -168,17 +172,14 @@ const ProductDetails = () => {
                 <div className={styles.actionButtons}>
                   {LoggedIn ? (
                     <button onClick={() => AddtoCart("add")} type="">
-                      Add to cart
+                      {CartString ? CartString : "Add to cart"}
                     </button>
                   ) : (
                     <NavLink to="/login">
                       <button type="">Login / Signup</button>
                     </NavLink>
                   )}
-                  <NavLink
-                    onClick={() => AddtoCart("buy")}
-                    to={LoggedIn ? "/usercart" : "/login"}
-                  >
+                  <NavLink to={LoggedIn ? "/usercart" : "/login"}>
                     <button type="">Buy Now</button>
                   </NavLink>
                 </div>

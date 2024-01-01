@@ -6,7 +6,9 @@ const OrderPlaced = () => {
   return (
     <div>
       <div className={styles.brandLogo}>
-        <img src="/images/logo.png" alt="Brand Logo" />
+        <NavLink to="/">
+          <img src="/images/logo.png" alt="Brand Logo" />
+        </NavLink>
       </div>
       <div className={styles.confetiCardContainer}>
         <div className={styles.confetiCard}>
