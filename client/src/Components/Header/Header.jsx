@@ -53,7 +53,7 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.mobHeader}>
-        <NavLink to="/home">
+        <NavLink to="/">
           <img src="/images/moblogo.png" alt="Brand Logo" />
         </NavLink>
       </div>
