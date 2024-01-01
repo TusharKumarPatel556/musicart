@@ -11,8 +11,12 @@ const MobileNav = () => {
   const { HandleLogin, LoggedIn, SetLoggedIn } = useContext(MusicContext);
   const Navigate = useNavigate();
 
-  const HandleClick = () => {
-    HandleLogin();
+  const HandleClick = async () => {
+    localStorage.removeItem("token");
+    const res = await HandleLogin();
+    if (LoggedIn) {
+      Navigate("/");
+    }
   };
 
   return (
@@ -31,6 +35,9 @@ const MobileNav = () => {
       <div>
         <NavLink to="/login" onClick={HandleClick}>
           <IoPersonOutline className={styles.navIcon} />
+          <div style={{ fontSize: "12px" }}>
+            {LoggedIn ? "Logout" : "Login"}
+          </div>
         </NavLink>
       </div>
     </div>

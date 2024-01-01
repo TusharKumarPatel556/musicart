@@ -6,6 +6,7 @@ import { FaStar } from "react-icons/fa6";
 import Carousel from "../Carousel/Carousel";
 import { ProductInfo } from "../../Api/ProductApi/ProductApi";
 import { MusicContext } from "../../Context/Context";
+import { GetCartList } from "../../Api/UserApi/UserApi";
 
 const ProductDetails = () => {
   const [Product, SetProduct] = useState({});
@@ -17,10 +18,10 @@ const ProductDetails = () => {
   const [error, Seterror] = useState("");
   const [CartString, SetCartString] = useState("");
 
-  console.log("detail page UserCart ", UserCart);
-  console.log("detail page CartItems", CartItems);
+  // console.log("detail page UserCart ", UserCart);
+  // console.log("detail page CartItems", CartItems);
 
-  console.log("Product Details   LoggedIn", LoggedIn);
+  // console.log("Product Details   LoggedIn", LoggedIn);
 
   const GetDetails = async (ProductId) => {
     const response = await ProductInfo(ProductId);
@@ -32,6 +33,20 @@ const ProductDetails = () => {
     }
   };
 
+  const CartList = async (CartItems) => {
+    const cartlist = await GetCartList();
+
+    if (cartlist.data.message == "success") {
+      SetUserCart({ ...CartItems, ...cartlist.data.UserCart[0] });
+    } else {
+      Seterror("error");
+    }
+  };
+
+  useEffect(() => {
+    CartList();
+  }, []);
+
   useEffect(() => {
     if (Product) {
       SetPageName(`/${Product.product_name}`);
@@ -39,29 +54,35 @@ const ProductDetails = () => {
   }, [Product]);
 
   const AddtoCart = async (action) => {
-    if ("add") {
+    console.log("Add to cart function");
+
+    if (action == "add") {
+      console.log("Added 1 to cart ");
       SetCartString("added");
       let quantity = 1;
       if (UserCart[ProductId]) {
         quantity = Number(UserCart[ProductId]) + 1;
       }
-      SetUserCart({ ...UserCart, [ProductId]: quantity });
-      setTimeout(() => {
-        SetCartString("");
-      }, 1000);
-    } else {
-      SetCartString("added");
 
+      setTimeout(() => {
+        SetUserCart({ ...UserCart, [ProductId]: quantity });
+      }, 1000);
+      SetCartString("");
+      Navigate("/usercart");
+    } else {
       if (UserCart[ProductId]) {
         console.log("Navigated");
         Navigate("/usercart");
       }
-
-      SetUserCart({ ...UserCart, [ProductId]: 1 });
+      console.log("Clicked on Buy Now", ProductId);
+      console.log("Added to user cart", UserCart);
       setTimeout(() => {
-        SetCartString("");
-        Navigate("/usercart");
-      }, 3000);
+        SetUserCart({ ...UserCart, [ProductId]: 1 });
+      }, 700);
+      console.log("logged In", LoggedIn);
+      console.log("Added to user cart", UserCart);
+
+      Navigate("/usercart");
     }
   };
 
@@ -71,7 +92,7 @@ const ProductDetails = () => {
     }
     GetDetails(ProductId);
   }, []);
-
+  // to={LoggedIn ? "/usercart" : "/login"}
   return (
     <div>
       {!error ? (
@@ -181,12 +202,8 @@ const ProductDetails = () => {
                       <button type="">Login / Signup</button>
                     </NavLink>
                   )}
-                  <NavLink
-                    onClick={() => AddtoCart("buy")}
-                    to={LoggedIn ? "/usercart" : "/login"}
-                  >
-                    <button type="">Buy Now</button>
-                  </NavLink>
+
+                  <button onClick={() => AddtoCart("buy")}>Buy Now</button>
                 </div>
               </div>
             </div>

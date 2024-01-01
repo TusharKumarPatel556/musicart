@@ -23,7 +23,6 @@ export const Register = async (userData) => {
 
 export const LoginUser = async (userData) => {
   try {
-    console.log("request sent");
     const response = await axios({
       method: "get",
       url: `${BaseUrl}/api/user/login`,
@@ -46,15 +45,17 @@ export const LoginUser = async (userData) => {
 
 export const SetCartItem = async (CartItems) => {
   try {
-    const response = await axios({
-      method: "put",
-      url: `${BaseUrl}/api/user/set-user-cart`,
-      params: CartItems,
-      headers: {
-        "Content-Type": "application/json",
-        token: localStorage.getItem("token"),
-      },
-    });
+    if (localStorage.getItem("token")) {
+      const response = await axios({
+        method: "put",
+        url: `${BaseUrl}/api/user/set-user-cart`,
+        params: CartItems,
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      });
+    }
   } catch (err) {
     return err;
   }
@@ -80,7 +81,6 @@ export const GetCartItem = async (CartItems) => {
 
 export const GetCartList = async () => {
   try {
-    console.log("Token", localStorage.getItem("token"));
     const response = await axios({
       method: "get",
       url: `${BaseUrl}/api/user/user-cart-list`,

@@ -48,6 +48,12 @@
 }
 
 @media only screen and (max-width: 500px) and (min-width: 300px) {
+  .dropdownMenu {
+    margin: 0 10px;
+    width: 130px;
+    z-index: 400;
+    position: relative;
+  }
   .dropDownbtn {
     cursor: pointer;
     padding: 5px;

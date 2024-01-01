@@ -22,8 +22,8 @@ const CartDetail = () => {
 
   const Quant = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  console.log("cart page UserCart ", UserCart);
-  console.log("cart page CartItems", CartItems);
+  // console.log("cart page UserCart ", UserCart);
+  // console.log("cart page CartItems", CartItems);
 
   const CartList = async (CartItems) => {
     const cartlist = await GetCartList();
@@ -59,12 +59,12 @@ const CartDetail = () => {
 
   useEffect(() => {
     SetPageName("/View Cart");
-    console.log(" CartDetails page  CartList lunched");
+    // console.log(" CartDetails page  CartList lunched");
     CartList();
   }, [LoggedIn]);
 
   useEffect(() => {
-    console.log(" CartDetails page  CartData lunched");
+    // console.log(" CartDetails page  CartData lunched");
     CartData();
   }, [UserCart]);
 
@@ -77,7 +77,7 @@ const CartDetail = () => {
               <div>
                 <div className={styles.cartDetail}>
                   {CartItems.map((item, index) => (
-                    <div key={index}>
+                    <div style={{ marginTop: "10px" }} key={index}>
                       <div className={styles.priceDistribution}>
                         <ProductImg img={item.img_url[0]} />
                         <div className={styles.purchaseInfo}>
@@ -87,6 +87,7 @@ const CartDetail = () => {
                             </h3>
                             <p>Color:{item.color}</p>
                             <br />
+
                             <p>{item.availability}</p>
                           </div>
 
@@ -136,13 +137,17 @@ const CartDetail = () => {
                         </div>
                         <div className={styles.purchaseInfoMobile}>
                           <h3>{item.product_name}</h3>
-
-                          <p className={styles.price}>
+                          <p
+                            style={{ fontSize: "18px" }}
+                            className={styles.price}
+                          >
                             &#8377;{item.price.toFixed(2)}
                           </p>
+                          <br />
                           <p>Colour - {item.color}</p>
                           <br />
                           <p>{item.availability}</p>
+                          <br />
                           <p>Convenience fee &nbsp;&nbsp;&#8377;45</p>
                         </div>
                       </div>
@@ -165,7 +170,9 @@ const CartDetail = () => {
                   <div className={styles.subtotalMobile}>
                     <h4>
                       <span>Total:</span>
-                      <span>{(Total + 45).toFixed(2)}</span>
+                      <span style={{ marginLeft: "50px" }}>
+                        {(Total + 45).toFixed(2)}
+                      </span>
                     </h4>
                   </div>
                   <NavLink to="/checkout">

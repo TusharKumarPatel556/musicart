@@ -12,9 +12,13 @@ const Header = () => {
   const { HandleLogin, LoggedIn, SetLoggedIn } = useContext(MusicContext);
   const Navigate = useNavigate();
 
-  const HandleClick = () => {
+  const HandleClick = async () => {
     localStorage.removeItem("token");
-    HandleLogin();
+    const res = await HandleLogin();
+
+    if (LoggedIn) {
+      Navigate("/");
+    }
   };
 
   return (
@@ -49,7 +53,9 @@ const Header = () => {
         </div>
       </div>
       <div className={styles.mobHeader}>
-        <img src="/images/moblogo.png" alt="Brand Logo" />
+        <NavLink to="/home">
+          <img src="/images/moblogo.png" alt="Brand Logo" />
+        </NavLink>
       </div>
     </div>
   );

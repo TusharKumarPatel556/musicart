@@ -78,6 +78,7 @@
   }
   .purchaseInfoMobile {
     display: block;
+    margin-top: 20px;
     line-height: 25px;
   }
   .purchaseInfoMobile h3 {
@@ -89,14 +90,15 @@
   }
   .subtotalMobile {
     display: flex;
-    justify-content: end;
+    justify-content: start;
   }
   .subtotalMobile h4 {
-    width: 200px;
+    width: 300px;
     display: flex;
     padding-inline: 30px;
     font-size: 20px;
-    justify-content: space-between;
+
+    justify-content: start;
   }
 
   .placeOrder {

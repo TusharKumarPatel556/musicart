@@ -13,14 +13,15 @@ const DataProvider = ({ children }) => {
   const [UserCart, SetUserCart] = useState({});
   const [CartItems, SetCartItems] = useState([]);
   const [PageName, SetPageName] = useState("");
-  // const Navigate = useNavigate();
 
-  const HandleLogin = (parameter) => {
-    // SetLoggedIn(!LoggedIn);
+  const HandleLogin = () => {
     if (localStorage.getItem("token")) {
       SetLoggedIn(true);
+      console.log("Token exists", LoggedIn);
     } else {
       SetLoggedIn(false);
+      console.log("Token does not exists", LoggedIn);
+      console.log("Token does not exists", LoggedIn);
     }
   };
 

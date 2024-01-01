@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./Signup.module.css";
 import ErrorMsg from "../../Utils/ErrorMsg/ErrorMsg";
 import { Register } from "../../Api/UserApi/UserApi";
 import { useNavigate } from "react-router-dom";
+import { MusicContext } from "../../Context/Context";
 
 const Signup = () => {
   const [message, setmessage] = useState("");
   const Navigate = useNavigate();
-
+  const { LoggedIn, SetLoggedIn } = useContext(MusicContext);
   const InitialValues = {
     name: "",
     email: "",
@@ -28,6 +29,7 @@ const Signup = () => {
     console.log(values);
     const response = await Register(values);
     if (response == "success") {
+      SetLoggedIn(true);
       Navigate("/");
     } else {
       setmessage(response);
