@@ -7,7 +7,7 @@ import { SetCartItem } from "../Api/UserApi/UserApi";
 export const MusicContext = createContext();
 
 const DataProvider = ({ children }) => {
-  const [LoggedIn, SetLoggedIn] = useState(true);
+  const [LoggedIn, SetLoggedIn] = useState(false);
   const [InventoryData, SetInventoryData] = useState([]);
   const [Filters, SetFilters] = useState({});
   const [UserCart, SetUserCart] = useState({});
@@ -39,6 +39,7 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     HandleLogin();
   }, []);
+
   useEffect(() => {
     SetCartItem(UserCart);
   }, [UserCart]);

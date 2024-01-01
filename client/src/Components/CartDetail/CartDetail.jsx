@@ -19,11 +19,15 @@ const CartDetail = () => {
   } = useContext(MusicContext);
   const [error, Seterror] = useState("");
   const [Total, SetTotal] = useState(0);
-  // console.log("Cart Details  UserCart", UserCart);
-  const Quant = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+  const Quant = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  console.log("cart page UserCart ", UserCart);
+  console.log("cart page CartItems", CartItems);
+
   const CartList = async (CartItems) => {
     const cartlist = await GetCartList();
-    // console.log("catlist", cartlist);
+
     if (cartlist.data.message == "success") {
       SetUserCart({ ...CartItems, ...cartlist.data.UserCart[0] });
     } else {
@@ -33,13 +37,16 @@ const CartDetail = () => {
 
   const CartData = async () => {
     const response = await GetCartItem(UserCart);
-    // console.log("All products you purchased", response);
     if (response.data.message == "success") {
-      // console.log("All products you purchased", response);
       SetCartItems(response.data.CartItem);
     } else {
       Seterror("error");
     }
+  };
+
+  const HandleSelect = (e, id) => {
+    const quantity = e.target.value;
+    SetUserCart({ ...UserCart, [id]: quantity });
   };
 
   useEffect(() => {
@@ -51,29 +58,15 @@ const CartDetail = () => {
   }, [CartItems]);
 
   useEffect(() => {
-    CartData();
-  }, [UserCart]);
-
-  // console.log("UserCart", UserCart);
-  // console.log("SetUserCart", SetUserCart);
-  //
-  // console.log("CartItems", CartItems);
-  // console.log("SetCartItems", SetCartItems);
-
-  const HandleSelect = (e, id) => {
-    const quantity = e.target.value;
-
-    SetUserCart({ ...UserCart, [id]: quantity });
-  };
-
-  // useEffect(() => {
-  //   console.log("Cart Items", CartItems);
-  // }, [CartItems]);
-
-  useEffect(() => {
     SetPageName("/View Cart");
+    console.log(" CartDetails page  CartList lunched");
     CartList();
   }, [LoggedIn]);
+
+  useEffect(() => {
+    console.log(" CartDetails page  CartData lunched");
+    CartData();
+  }, [UserCart]);
 
   return (
     <div>
@@ -184,7 +177,9 @@ const CartDetail = () => {
               </div>
             </>
           ) : (
-            <div>Add Products to Your Cart</div>
+            <div className={styles.emptyCart}>
+              <NavLink to="/">Add Products to Your Cart</NavLink>
+            </div>
           )}
         </>
       ) : (

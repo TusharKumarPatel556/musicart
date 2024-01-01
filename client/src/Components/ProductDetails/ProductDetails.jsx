@@ -13,9 +13,12 @@ const ProductDetails = () => {
   const { LoggedIn, SetLoggedIn, PageName, SetPageName } =
     useContext(MusicContext);
   const Navigate = useNavigate();
-  const { UserCart, SetUserCart } = useContext(MusicContext);
+  const { UserCart, SetUserCart, CartItems } = useContext(MusicContext);
   const [error, Seterror] = useState("");
   const [CartString, SetCartString] = useState("");
+
+  console.log("detail page UserCart ", UserCart);
+  console.log("detail page CartItems", CartItems);
 
   console.log("Product Details   LoggedIn", LoggedIn);
 
@@ -35,15 +38,6 @@ const ProductDetails = () => {
     }
   }, [Product]);
 
-  // const AddItem = () => {
-  //   let quantity = 1;
-  //   if (UserCart[ProductId]) {
-  //     quantity = Number(UserCart[ProductId]) + 1;
-  //   }
-  //   SetUserCart({ ...UserCart, [ProductId]: quantity });
-  //   return "added";
-  // };
-
   const AddtoCart = async (action) => {
     if ("add") {
       SetCartString("added");
@@ -56,10 +50,18 @@ const ProductDetails = () => {
         SetCartString("");
       }, 1000);
     } else {
-      const resp = AddItem();
-      if (resp == "added") {
+      SetCartString("added");
+
+      if (UserCart[ProductId]) {
+        console.log("Navigated");
         Navigate("/usercart");
       }
+
+      SetUserCart({ ...UserCart, [ProductId]: 1 });
+      setTimeout(() => {
+        SetCartString("");
+        Navigate("/usercart");
+      }, 3000);
     }
   };
 
@@ -179,7 +181,10 @@ const ProductDetails = () => {
                       <button type="">Login / Signup</button>
                     </NavLink>
                   )}
-                  <NavLink to={LoggedIn ? "/usercart" : "/login"}>
+                  <NavLink
+                    onClick={() => AddtoCart("buy")}
+                    to={LoggedIn ? "/usercart" : "/login"}
+                  >
                     <button type="">Buy Now</button>
                   </NavLink>
                 </div>
