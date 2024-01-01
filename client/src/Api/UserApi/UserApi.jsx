@@ -63,17 +63,19 @@ export const SetCartItem = async (CartItems) => {
 
 export const GetCartItem = async (CartItems) => {
   try {
-    const response = await axios({
-      method: "get",
-      url: `${BaseUrl}/api/user/get-user-cart`,
-      params: CartItems,
-      headers: {
-        "Content-Type": "application/json",
-        token: localStorage.getItem("token"),
-      },
-    });
+    if (localStorage.getItem("token")) {
+      const response = await axios({
+        method: "get",
+        url: `${BaseUrl}/api/user/get-user-cart`,
+        params: CartItems,
+        headers: {
+          "Content-Type": "application/json",
+          token: localStorage.getItem("token"),
+        },
+      });
 
-    return response;
+      return response;
+    }
   } catch (err) {
     return err;
   }

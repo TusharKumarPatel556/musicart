@@ -44,7 +44,9 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    CartList();
+    if (localStorage.getItem("token")) {
+      CartList();
+    }
   }, []);
 
   useEffect(() => {
