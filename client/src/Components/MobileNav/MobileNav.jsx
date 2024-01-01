@@ -27,7 +27,7 @@ const MobileNav = () => {
         </NavLink>
       </div>
       <div>
-        <NavLink to="/usercart">
+        <NavLink to={LoggedIn ? "/usercart" : "/login"}>
           <MdOutlineAddShoppingCart className={styles.navIcon} />
         </NavLink>
       </div>
