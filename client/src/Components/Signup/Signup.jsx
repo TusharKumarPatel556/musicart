@@ -26,7 +26,6 @@ const Signup = () => {
   });
 
   const OnSubmit = async (values) => {
-    console.log(values);
     const response = await Register(values);
     if (response == "success") {
       SetLoggedIn(true);

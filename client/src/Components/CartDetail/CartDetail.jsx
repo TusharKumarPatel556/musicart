@@ -22,9 +22,6 @@ const CartDetail = () => {
 
   const Quant = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  // console.log("cart page UserCart ", UserCart);
-  // console.log("cart page CartItems", CartItems);
-
   const CartList = async (CartItems) => {
     const cartlist = await GetCartList();
 
@@ -59,12 +56,11 @@ const CartDetail = () => {
 
   useEffect(() => {
     SetPageName("/View Cart");
-    // console.log(" CartDetails page  CartList lunched");
+
     CartList();
   }, [LoggedIn]);
 
   useEffect(() => {
-    // console.log(" CartDetails page  CartData lunched");
     CartData();
   }, [UserCart]);
 

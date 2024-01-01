@@ -100,8 +100,3 @@ export const GetCartList = async () => {
     return err;
   }
 };
-
-// export const Logout = () => {
-//   console.log("logout ");
-//   localStorage.removeItem("token");
-// };

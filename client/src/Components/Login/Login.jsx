@@ -26,7 +26,7 @@ const Login = () => {
 
   const OnSubmit = async (values) => {
     const response = await LoginUser(values);
-    console.log("login response", response);
+
     if (response.data.message === "user success") {
       HandleLogin(true);
 

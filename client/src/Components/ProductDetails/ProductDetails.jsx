@@ -18,11 +18,6 @@ const ProductDetails = () => {
   const [error, Seterror] = useState("");
   const [CartString, SetCartString] = useState("");
 
-  // console.log("detail page UserCart ", UserCart);
-  // console.log("detail page CartItems", CartItems);
-
-  // console.log("Product Details   LoggedIn", LoggedIn);
-
   const GetDetails = async (ProductId) => {
     const response = await ProductInfo(ProductId);
 
@@ -56,10 +51,7 @@ const ProductDetails = () => {
   }, [Product]);
 
   const AddtoCart = async (action) => {
-    console.log("Add to cart function");
-
     if (action == "add") {
-      console.log("Added 1 to cart ");
       SetCartString("added");
       let quantity = 1;
       if (UserCart[ProductId]) {
@@ -73,16 +65,12 @@ const ProductDetails = () => {
       Navigate("/usercart");
     } else {
       if (UserCart[ProductId]) {
-        console.log("Navigated");
         Navigate("/usercart");
       }
-      console.log("Clicked on Buy Now", ProductId);
-      console.log("Added to user cart", UserCart);
+
       setTimeout(() => {
         SetUserCart({ ...UserCart, [ProductId]: 1 });
       }, 700);
-      console.log("logged In", LoggedIn);
-      console.log("Added to user cart", UserCart);
 
       Navigate("/usercart");
     }

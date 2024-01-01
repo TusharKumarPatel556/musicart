@@ -17,11 +17,8 @@ const DataProvider = ({ children }) => {
   const HandleLogin = () => {
     if (localStorage.getItem("token")) {
       SetLoggedIn(true);
-      console.log("Token exists", LoggedIn);
     } else {
       SetLoggedIn(false);
-      console.log("Token does not exists", LoggedIn);
-      console.log("Token does not exists", LoggedIn);
     }
   };
 

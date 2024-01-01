@@ -14,7 +14,7 @@ const Filter = (props) => {
   }, [props.list]);
 
   const Values = Object.values(Filters);
-  console.log(Values);
+
   const HandleDisplay = () => {
     SetDisplay(!Display);
   };
