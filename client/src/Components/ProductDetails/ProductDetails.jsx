@@ -55,14 +55,19 @@ const ProductDetails = () => {
       SetCartString("added");
       let quantity = 1;
       if (UserCart[ProductId]) {
-        quantity = Number(UserCart[ProductId]) + 1;
+        setTimeout(() => {
+          quantity = Number(UserCart[ProductId]) + 1;
+        }, 500);
       }
 
       setTimeout(() => {
         SetUserCart({ ...UserCart, [ProductId]: quantity });
+        SetCartString("");
       }, 1000);
-      SetCartString("");
-      Navigate("/usercart");
+
+      setTimeout(() => {
+        Navigate("/usercart");
+      }, 1000);
     } else {
       if (UserCart[ProductId]) {
         Navigate("/usercart");
