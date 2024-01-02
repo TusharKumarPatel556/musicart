@@ -26,8 +26,6 @@ const HomePage = () => {
   const [View, SetView] = useState("grid");
   const [error, Seterror] = useState("");
 
-  console.log("home page  LoggedIn", LoggedIn);
-
   const HandleGridClick = () => {
     SetView("grid");
   };
@@ -44,7 +42,9 @@ const HomePage = () => {
     const data = await AllProducts(Filters);
 
     if (data.message == "success") {
-      SetProducts(data.products);
+      setTimeout(() => {
+        SetProducts(data.products);
+      }, 700);
     } else {
       Seterror("Failed to get data");
     }

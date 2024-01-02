@@ -82,7 +82,7 @@ const ProductDetails = () => {
     }
     GetDetails(ProductId);
   }, []);
-  // to={LoggedIn ? "/usercart" : "/login"}
+
   return (
     <div>
       {!error ? (
@@ -192,8 +192,13 @@ const ProductDetails = () => {
                       <button type="">Login / Signup</button>
                     </NavLink>
                   )}
-
-                  <button onClick={() => AddtoCart("buy")}>Buy Now</button>
+                  {LoggedIn ? (
+                    <button onClick={() => AddtoCart("buy")}>Buy Now</button>
+                  ) : (
+                    <NavLink to="/login">
+                      <button>Buy Now</button>
+                    </NavLink>
+                  )}
                 </div>
               </div>
             </div>
