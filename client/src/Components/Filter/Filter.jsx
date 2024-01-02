@@ -21,7 +21,7 @@ const Filter = (props) => {
   const HandleClick = (e) => {
     const Value = e.target.getAttribute("value");
     const Name = e.target.getAttribute("name");
-
+    SetDisplay(!Display);
     SetFilters({ ...Filters, [Name]: Value });
   };
   return (

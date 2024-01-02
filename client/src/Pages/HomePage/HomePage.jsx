@@ -81,6 +81,8 @@ const HomePage = () => {
 
   return (
     <div>
+      {Object.keys(Filters).length != 0 && Products.length == 0 ? <></> : <></>}
+
       {!error ? (
         <>
           {Products ? (
@@ -141,17 +143,25 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <div className={styles.productContainer}>
-                  {Products
-                    ? Products.map((product, index) => (
-                        <ProductCard
-                          View={View}
-                          product={product}
-                          key={index}
-                        />
-                      ))
-                    : null}
-                </div>
+                {Object.keys(Filters).length != 0 && Products.length == 0 ? (
+                  <div className={styles.absentProduct}>
+                    <h2>We Don't Have This Product</h2>
+                  </div>
+                ) : (
+                  <div>
+                    <div className={styles.productContainer}>
+                      {Products
+                        ? Products.map((product, index) => (
+                            <ProductCard
+                              View={View}
+                              product={product}
+                              key={index}
+                            />
+                          ))
+                        : null}
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           ) : (

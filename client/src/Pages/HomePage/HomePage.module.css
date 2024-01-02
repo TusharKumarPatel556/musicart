@@ -107,6 +107,14 @@
   z-index: 0;
 }
 
+.absentProduct {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: var(--primary-colour);
+}
+
 @media only screen and (max-width: 500px) and (min-width: 300px) {
   .aboutPage,
   .viewOption {
@@ -166,6 +174,14 @@
     overflow-x: auto;
     display: flex;
     justify-content: space-between;
+  }
+
+  .absentProduct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    color: var(--primary-colour);
   }
 }
 
@@ -229,5 +245,12 @@
     overflow-x: auto;
     display: flex;
     justify-content: space-between;
+  }
+  .absentProduct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    color: var(--primary-colour);
   }
 }
