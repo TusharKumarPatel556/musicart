@@ -4,38 +4,61 @@
   justify-content: center;
   margin-top: 50px;
 }
+
 .priceDistribution {
   display: flex;
-  justify-content: center;
-  padding: 10px 5px;
-}
+  margin: auto;
+  width: 90%;
 
-.cartProductname .productName {
-  overflow-wrap: break-word;
-  max-width: 150px;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.priceDistribution .productImg {
+  width: 30%;
+  display: flex;
+  justify-content: end;
 }
 
 .purchaseInfo {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3.5fr 1fr 1fr 1fr 5fr;
+  width: 70%;
 }
-.purchaseInfo div {
-  margin-right: 100px;
+
+/* .cartProductname .productName {
+  overflow-wrap: break-word;
+  max-width: 250px;
+} */
+
+.purchaseInfo .cartProductname {
+  font-size: 15px;
+}
+
+.purchaseInfo .productQuantity {
+}
+.purchaseInfo .productQuantity .quantityOptions {
+  border: 1px solid #bebebe;
+  width: 90%;
+}
+.purchaseInfo .productQuantity .quantityOptions option {
+  border-top: 1px solid #bebebe;
 }
 
 .cartProductname p {
   color: #a2a2a2;
 }
 
-.priceDetail {
-  width: 200px;
-}
 .priceDetail p {
   display: flex;
   justify-content: space-between;
   line-height: 30px;
 }
+
 .priceDetail p span:nth-child(2) {
-  width: 50px;
+  width: 150px;
+  display: flex;
+
+  justify-content: start;
 }
 
 .purchaseInfoMobile,
@@ -44,21 +67,30 @@
 }
 
 .subtotal {
-  display: flex;
+  display: grid;
+
+  font-size: 20px;
 }
 
 .subtotal > div {
   display: flex;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
+
   justify-content: space-between;
 }
 
+.subtotal .totalcontainer {
+  display: grid;
+  grid-template-columns: 6fr 3fr 4fr;
+}
+
 .placeOrder {
+  width: 100%;
   display: flex;
   justify-content: end;
-  margin-top: 50px;
-  padding-inline: 260px;
+  margin-top: 10px;
+  padding-right: 130px;
   margin-bottom: 20px;
 }
 
@@ -76,8 +108,23 @@
   .priceDistribution {
     background-color: #dbdbdb;
   }
+  .priceDistribution {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    border: 2px solid black;
+    justify-content: center;
+    padding: 10px 0px;
+  }
+  .priceDistribution .productImg {
+    width: auto;
+    display: flex;
+    justify-content: end;
+  }
+
   .purchaseInfoMobile {
     display: block;
+    margin-left: -23px;
     margin-top: 20px;
     line-height: 25px;
   }
@@ -97,15 +144,13 @@
     display: flex;
     padding-inline: 30px;
     font-size: 20px;
-
     justify-content: start;
   }
-
   .placeOrder {
-    display: flex;
-    justify-content: end;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    padding-inline: 0px;
+    text-align: center;
+    margin-top: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-right: 0px;
   }
 }
