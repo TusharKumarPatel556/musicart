@@ -57,7 +57,7 @@ const ProductDetails = () => {
       if (UserCart[ProductId]) {
         setTimeout(() => {
           quantity = Number(UserCart[ProductId]) + 1;
-        }, 500);
+        }, 850);
       }
 
       setTimeout(() => {
@@ -75,7 +75,7 @@ const ProductDetails = () => {
 
       setTimeout(() => {
         SetUserCart({ ...UserCart, [ProductId]: 1 });
-      }, 700);
+      }, 1000);
 
       Navigate("/usercart");
     }
