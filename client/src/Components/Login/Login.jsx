@@ -20,7 +20,9 @@ const Login = () => {
   };
 
   const ValidationSchema = Yup.object({
-    email: Yup.string().required("Email Id or Phone Number is Required"),
+    email: Yup.string()
+      .email()
+      .required("Email Id or Phone Number is Required"),
     password: Yup.string().required("Password is Required"),
   });
 

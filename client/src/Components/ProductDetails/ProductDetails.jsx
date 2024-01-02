@@ -63,7 +63,7 @@ const ProductDetails = () => {
       setTimeout(() => {
         SetUserCart({ ...UserCart, [ProductId]: quantity });
         SetCartString("");
-      }, 1000);
+      }, 1500);
 
       setTimeout(() => {
         Navigate("/usercart");
@@ -75,7 +75,7 @@ const ProductDetails = () => {
 
       setTimeout(() => {
         SetUserCart({ ...UserCart, [ProductId]: 1 });
-      }, 1000);
+      }, 1300);
 
       Navigate("/usercart");
     }

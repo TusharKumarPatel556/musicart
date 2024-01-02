@@ -35,7 +35,9 @@ const CartDetail = () => {
   const CartData = async () => {
     const response = await GetCartItem(UserCart);
     if (response.data.message == "success") {
-      SetCartItems(response.data.CartItem);
+      setTimeout(() => {
+        SetCartItems(response.data.CartItem);
+      }, 1000);
     } else {
       Seterror("error");
     }
@@ -43,7 +45,9 @@ const CartDetail = () => {
 
   const HandleSelect = (e, id) => {
     const quantity = e.target.value;
-    SetUserCart({ ...UserCart, [id]: quantity });
+    setTimeout(() => {
+      SetUserCart({ ...UserCart, [id]: quantity });
+    }, 1000);
   };
 
   useEffect(() => {

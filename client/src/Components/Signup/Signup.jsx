@@ -20,7 +20,7 @@ const Signup = () => {
 
   const ValidationSchema = Yup.object({
     name: Yup.string().required("Name is Required"),
-    email: Yup.string().required("Email is Required"),
+    email: Yup.string().email().required("Email is Required"),
     mobile: Yup.string().required("Mobile Number Required"),
     password: Yup.string().required("Password is Required"),
   });
